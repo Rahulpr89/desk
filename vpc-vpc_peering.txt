@@ -1,0 +1,136 @@
+vpc
+
+
+got to vpc =>
+create vpc -> vpc only -> name(devops-vpc) -> put IPv4 CIDR value 10.0.0.0/16 -> create
+IGW -> create -> name(devops-igw) -> create
+1) subnet -> choose devops-vpc -> name(public-subnet) -> availability zone (1a) -> IPv4 subnet CIDR block(10.0.0.0/24) ->create
+
+2) subnet -> choose devops-vpc -> name(private-subnet) -> AZ(1b) -> subnet block (10.0.1.0/24) -> create
+
+launch two ec2 instance 1) web-sever
+                        2) database-server
+with same key-pair
+and security  group 
+web-server with devops-vpc and subnet 1a and http 80 should be allowed 
+and public ip enabled  and subnet 1a
+database-server with devops-vpc subnet 1b and same security group and public ip should be disabled and subnet 1b
+
+web-server will not connect
+
+so now attach igw to vpc
+select devops igw and -> action -> attach to vpc -> select and attach
+
+again it will not work 
+create route table
+choose devops-vpc -> name(public-rt) -> create
+now edit routes
+add route => destination(0.0.0.0/0) and target (internet gateway and choose the gateway) -> save
+
+now subnet association => 
+edit -> choose public and save
+
+now to to terminal and paste the ssh key of web-server and now it will work
+in the terminal
+ yum install httpd -y
+ echo "This is my apache server" >> /var/www/html/index.html
+ systemctl start httpd
+ systemctl enable httpd
+ curl http://public ip:port
+
+
+go to security group and add all icmp ipv4 in inbound rules
+
+and ping private ip of database server and it will work
+
+go to key pair and copy the content of it by control A and control C 
+and paste and save here
+vim custom-vpc-key.pem
+chmod 400 custom-vpc-key.pem =>key name of your own generated key
+ll -d custom-vpc-key.pem
+ ssh -i  custom-vpc-key.pem ec2-user@private ip of database-server
+
+now we will be able to access the database server but ping google.com will not work 
+
+so make nat
+
+create new nat gateway -> give name (devops-new-ngw) -> choose public subnet -> allocate elastic ip -> create
+
+wait for it to available
+
+make route table entry
+create -> name(private-rt) -> choose vpc -> create
+edit => add -> destination(0.0.0.0/0) and target (Nat gateway and choose) -> save
+subnet association -> edit -> choose private subnet -> save
+
+now internet will work
+
+ping google.com    -> this will work now
+
+***************************************************************************************************************
+
+
+VPC peering 
+Go to ohio region
+
+create vpc => name(prod-vpc) -> IPv4 CIDR(20.0.0.0/16) -> create
+create subnet => choose vpc(prod-vpc) ->name(prod-web-subnet) -> AZ(2a) -> IPv4 subnet CIDR block(20.0.0.0/24) -> create create another subnet => choose vpc -> name(prod-db-subnet -> AZ(2b) -> IPv4 subnet CIDR block(20.0.1.0/24)->create
+
+igw => create -> prod-igw -> create
+now attach it to vpc 
+
+create route table => 
+name(prod-public-rt) -> choose vpc -> create
+edit => add -> 0.0.0.0/0 and internet gateway and choose igw => save
+
+association => edit choose prod-web-subnet -> save
+
+now create one instance in ohio 
+
+name(ohio-server) -> choose vpc -> 2a -> Enable public ip auto assign -> SSH and HTTP and all icmp ipv4 allow name security grp -> launch
+
+connect
+
+in north virg. goto peering setting 
+give name(web to prod) -> vpc id of requester (devops-vpc) -> my account -> another region choose(ohio) -> 
+paste vpc id of ohio ->create
+
+now go to ohio and peering connection and select and action -> accept request
+
+now move to n.virg
+go to route table we need to add routes 
+edit and add 20.0.0.0/16 and peering connection and save changes
+
+now do same in ohio with destination 10.0.0.0/16 and peering connection and choose also 
+
+
+and now goto north.virg server
+if are in database server move out from there
+and type in web-server
+vim /etc/ssh/sshd_config
+PermitRootLogin yes  => make it yes
+PasswordAuthentication Yes => make it yes
+
+and passwd root
+systemctl start sshd
+systemctl enable sshd
+ cat > rahul.txt
+ scp rahul.txt root@private ip of ohio prod-server:/tmp
+if not works 
+then share the ssh with each other in authorized_keys section
+
+then it will work same for ohio server 
+and now move to database server in north virg. server
+by ssh -i key ec2-user@private ip 
+and move to root
+ vim /etc/ssh/sshd_config
+PermitRootLogin yes  => make it yes
+PasswordAuthentication Yes => make it yes
+
+and passwd root
+systemctl start sshd
+systemctl enable sshd
+ cat > server.txt
+ scp server.txt root@private ip of ohio prod-server:/tmp
+
+
