@@ -1,0 +1,7 @@
+#!/bin/bash
+yum install docker -y
+aws configure
+aws ecr create-repository --repository-name my-images-hub
+systemctl start docker
+systemctl enable docker
+systemctl status docker
