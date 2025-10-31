@@ -1,0 +1,442 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\10844721> cd download
+cd : Cannot find path 'C:\Users\10844721\download' because it does not exist.
+At line:1 char:1
++ cd download
++ ~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\10844721\download:String) [Set-Location], ItemNotFoundException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand
+
+PS C:\Users\10844721> cd downloads
+PS C:\Users\10844721\downloads> ssh -i "day-4.pem" ec2-user@ec2-98-81-106-210.compute-1.amazonaws.com
+ssh: connect to host ec2-98-81-106-210.compute-1.amazonaws.com port 22: Connection timed out
+PS C:\Users\10844721\downloads> ssh -i "day-4.pem" ec2-user@ec2-98-81-106-210.compute-1.amazonaws.com
+ssh: connect to host ec2-98-81-106-210.compute-1.amazonaws.com port 22: Connection timed out
+PS C:\Users\10844721\downloads> ssh -i "day-4.pem" ec2-user@ec2-98-81-106-210.compute-1.amazonaws.com
+ssh: connect to host ec2-98-81-106-210.compute-1.amazonaws.com port 22: Connection timed out
+PS C:\Users\10844721\downloads> ssh -i "day-4.pem" ec2-user@ec2-98-81-106-210.compute-1.amazonaws.com
+ssh: connect to host ec2-98-81-106-210.compute-1.amazonaws.com port 22: Connection timed out
+PS C:\Users\10844721\downloads> ll
+ll : The term 'll' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the
+name, or if a path was included, verify that the path is correct and try again.
+At line:1 char:1
++ ll
++ ~~
+    + CategoryInfo          : ObjectNotFound: (ll:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\10844721\downloads> ls
+
+
+    Directory: C:\Users\10844721\downloads
+
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        25-09-2025     09:19           1678 day-4.pem
+-a----        24-09-2025     11:44           1674 devops.pem
+
+
+PS C:\Users\10844721\downloads>
+PS C:\Users\10844721\downloads> ssh -i "day-4.pem" ec2-user@ec2-98-81-106-210.compute-1.amazonaws.com
+ssh: connect to host ec2-98-81-106-210.compute-1.amazonaws.com port 22: Connection timed out
+PS C:\Users\10844721\downloads> ssh -i "day-4.pem" ec2-user@ec2-98-80-134-159.compute-1.amazonaws.com
+The authenticity of host 'ec2-98-80-134-159.compute-1.amazonaws.com (98.80.134.159)' can't be established.
+ED25519 key fingerprint is SHA256:qYQcJhSOpzUEQQAUO4XBVuG5avxoyGFqa5cr5W5mCNY.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-98-80-134-159.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-172-31-7-247 ~]$ sudo su -
+[root@ip-172-31-7-247 ~]# hostnamectl set-hostname dev-server.example.com
+[root@ip-172-31-7-247 ~]# bash
+[root@dev-server ~]# hostname
+dev-server.example.com
+[root@dev-server ~]# ip a s
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: ens5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 02:6a:81:d9:49:19 brd ff:ff:ff:ff:ff:ff
+    altname enp0s5
+    altname eni-0baa750c34f1a267d
+    altname device-number-0.0
+    inet 172.31.7.247/20 metric 512 brd 172.31.15.255 scope global dynamic ens5
+       valid_lft 3509sec preferred_lft 3509sec
+    inet6 fe80::6a:81ff:fed9:4919/64 scope link proto kernel_ll
+       valid_lft forever preferred_lft forever
+[root@dev-server ~]# mkdir /data
+[root@dev-server ~]# cd /data
+[root@dev-server data]# git init
+bash: git: command not found
+[root@dev-server data]# yum install git -y
+Amazon Linux 2023 Kernel Livepatch repository                                                        212 kB/s |  23 kB     00:00
+Dependencies resolved.
+=====================================================================================================================================
+ Package                          Architecture           Version                                   Repository                   Size
+=====================================================================================================================================
+Installing:
+ git                              x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                  53 k
+Installing dependencies:
+ git-core                         x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                 4.9 M
+ git-core-doc                     noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                 2.8 M
+ perl-Error                       noarch                 1:0.17029-5.amzn2023.0.2                  amazonlinux                  41 k
+ perl-File-Find                   noarch                 1.37-477.amzn2023.0.7                     amazonlinux                  25 k
+ perl-Git                         noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                  41 k
+ perl-TermReadKey                 x86_64                 2.38-9.amzn2023.0.2                       amazonlinux                  36 k
+ perl-lib                         x86_64                 0.65-477.amzn2023.0.7                     amazonlinux                  15 k
+
+Transaction Summary
+=====================================================================================================================================
+Install  8 Packages
+
+Total download size: 7.9 M
+Installed size: 41 M
+Downloading Packages:
+(1/8): git-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                          1.6 MB/s |  53 kB     00:00
+(2/8): perl-Error-0.17029-5.amzn2023.0.2.noarch.rpm                                                  1.8 MB/s |  41 kB     00:00
+(3/8): git-core-doc-2.50.1-1.amzn2023.0.1.noarch.rpm                                                  40 MB/s | 2.8 MB     00:00
+(4/8): perl-File-Find-1.37-477.amzn2023.0.7.noarch.rpm                                               1.3 MB/s |  25 kB     00:00
+(5/8): git-core-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                      47 MB/s | 4.9 MB     00:00
+(6/8): perl-Git-2.50.1-1.amzn2023.0.1.noarch.rpm                                                     1.2 MB/s |  41 kB     00:00
+(7/8): perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64.rpm                                               1.1 MB/s |  36 kB     00:00
+(8/8): perl-lib-0.65-477.amzn2023.0.7.x86_64.rpm                                                     721 kB/s |  15 kB     00:00
+-------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                 53 MB/s | 7.9 MB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                             1/1
+  Installing       : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       1/8
+  Installing       : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   2/8
+  Installing       : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       3/8
+  Installing       : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 4/8
+  Installing       : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Installing       : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  6/8
+  Installing       : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       7/8
+  Installing       : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Running scriptlet: git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Verifying        : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            1/8
+  Verifying        : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       2/8
+  Verifying        : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   3/8
+  Verifying        : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  4/8
+  Verifying        : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Verifying        : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       6/8
+  Verifying        : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 7/8
+  Verifying        : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       8/8
+
+Installed:
+  git-2.50.1-1.amzn2023.0.1.x86_64            git-core-2.50.1-1.amzn2023.0.1.x86_64       git-core-doc-2.50.1-1.amzn2023.0.1.noarch
+  perl-Error-1:0.17029-5.amzn2023.0.2.noarch  perl-File-Find-1.37-477.amzn2023.0.7.noarch perl-Git-2.50.1-1.amzn2023.0.1.noarch
+  perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64 perl-lib-0.65-477.amzn2023.0.7.x86_64
+
+Complete!
+[root@dev-server data]# git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /data/.git/
+[root@dev-server data]# cat > index.html
+hello bro[root@dev-server data]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:VwJ9soUmQyyUSHCKKEX6FKZ3Bgz63vgm3Ea6V2u9aVI root@dev-server.example.com
+The key's randomart image is:
++---[RSA 3072]----+
+|.+Booo.+o. .     |
+|o*.=. o +.= o    |
+|B + o  . +.=.    |
+|.= o      .o     |
+|  o     S .      |
+| . o. . E.       |
+| .o+.. +         |
+|  +.= + o.       |
+|  .*.. oo.       |
++----[SHA256]-----+
+[root@dev-server data]#
+[root@dev-server data]#
+[root@dev-server data]#
+[root@dev-server data]# cat /.ssh/id_rsa.pub
+cat: /.ssh/id_rsa.pub: No such file or directory
+[root@dev-server data]# cd
+[root@dev-server ~]# cat .ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSyP1o4MPoCpYvg9iIGjC0CO9mrjtxnrwzoXyyLl7lqWxJoSn86v3XICmKpzjEzeUMXNIPqlCWPNJr49lxDGYjp3zAJD0ji9zcbyGawJX8isPTC/nhfhQ4pIlLB7SqcAd3iQd0h7W07X2WcBBj5zt/NFR3Hh2m8WJ0Xw20cUBJ2r0arQ/ofyNjmzUUereoTbJTdPV4bMrKj7cVwcsakBi7QDMEZCBLNT0+KaUyPnnCc9trcGqicIhmp63LJrOVS8eNkUfk/2kTX1inhf/Rb4SZeX6z08Ht6P6ETMzRysOgK+pYqdt3DwRi62OcNO0JMT31IWkC3lU4XGjrZP0xvQygwWzgvU86asmtp7zIjpge5MIouk+0my59IZh+sgW9AUc1s07P00BHvT3jQT5N2qe5m1pkqS1Rr846+eI8mlARw6VBU1hVqqM8dV5JE+cIu3kM6BITrJfh8TumMyIR64RTM0OiqOIscQK9bAnERpcD2t8NVHoAT4cqjaaYjMT5fj8= root@dev-server.example.com
+[root@dev-server ~]# cd /data
+[root@dev-server data]# git add.
+git: 'add.' is not a git command. See 'git --help'.
+
+The most similar command is
+        add
+[root@dev-server data]# git add .
+[root@dev-server data]# git commit -m "first-commit" index.html
+[master (root-commit) 5d0ad66] first-commit
+ Committer: root <root@dev-server.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+ create mode 100644 index.html
+[root@dev-server data]# git remote add origin https://github.com/Rahulpr89/devops-sep25.git
+[root@dev-server data]# git push origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/Rahulpr89/devops-sep25.git'
+[root@dev-server data]# git branch -M main
+[root@dev-server data]# git remote add origin https://github.com/Rahulpr89/devops-sep25.git
+error: remote origin already exists.
+[root@dev-server data]# git push origin main
+Username for 'https://github.com': Rahulpr89
+Password for 'https://Rahulpr89@github.com':
+remote: {"auth_status":"auth_error","body":"Invalid username or token. Password authentication is not supported for Git operations."}
+fatal: Authentication failed for 'https://github.com/Rahulpr89/devops-sep25.git/'
+[root@dev-server data]# git push origin main
+Username for 'https://github.com': Rahulpr89
+Password for 'https://Rahulpr89@github.com':
+remote: {"auth_status":"auth_error","body":"Invalid username or token. Password authentication is not supported for Git operations."}
+fatal: Authentication failed for 'https://github.com/Rahulpr89/devops-sep25.git/'
+[root@dev-server data]# git remote -v
+origin  https://github.com/Rahulpr89/devops-sep25.git (fetch)
+origin  https://github.com/Rahulpr89/devops-sep25.git (push)
+[root@dev-server data]# git remote remove origin
+[root@dev-server data]# git remote add origin https://github.com/Rahulpr89/devops-sep25.git
+[root@dev-server data]# git branch
+* main
+[root@dev-server data]# git push origin main
+Username for 'https://github.com': Rahulpr89
+Password for 'https://Rahulpr89@github.com':
+remote: {"auth_status":"auth_error","body":"Invalid username or token. Password authentication is not supported for Git operations."}
+fatal: Authentication failed for 'https://github.com/Rahulpr89/devops-sep25.git/'
+[root@dev-server data]# git remote add origin git@github.com:Rahulpr89/devops-sep25.git
+error: remote origin already exists.
+[root@dev-server data]# rm -rf .git
+[root@dev-server data]# l.
+ls: cannot access '.*': No such file or directory
+[root@dev-server data]# ls
+index.html
+[root@dev-server data]# l.
+ls: cannot access '.*': No such file or directory
+[root@dev-server data]# git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /data/.git/
+[root@dev-server data]# git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+[root@dev-server data]# git commit -m first-commit index.html
+error: pathspec 'index.html' did not match any file(s) known to git
+[root@dev-server data]# git add.
+git: 'add.' is not a git command. See 'git --help'.
+
+The most similar command is
+        add
+[root@dev-server data]# git add .
+[root@dev-server data]# git commit -m first-commit index.html
+[master (root-commit) 48d7055] first-commit
+ Committer: root <root@dev-server.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+ create mode 100644 index.html
+[root@dev-server data]# git branch -M main
+[root@dev-server data]# git branch
+* main
+[root@dev-server data]# git remote add origin git@github.com:Rahulpr89/devops-sep25.git
+[root@dev-server data]# git push origin main
+The authenticity of host 'github.com (140.82.112.4)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 222 bytes | 222.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To github.com:Rahulpr89/devops-sep25.git
+ * [new branch]      main -> main
+[root@dev-server data]# Connection to ec2-98-80-134-159.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-98-80-134-159.compute-1.amazonaws.com closed.
+PS C:\Users\10844721\downloads> ssh -i "day-4.pem" ec2-user@ec2-3-238-65-46.compute-1.amazonaws.com
+The authenticity of host 'ec2-3-238-65-46.compute-1.amazonaws.com (3.238.65.46)' can't be established.
+ED25519 key fingerprint is SHA256:qYQcJhSOpzUEQQAUO4XBVuG5avxoyGFqa5cr5W5mCNY.
+This host key is known by the following other names/addresses:
+    C:\Users\10844721/.ssh/known_hosts:26: ec2-98-80-134-159.compute-1.amazonaws.com
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-3-238-65-46.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Sep 25 07:07:46 2025 from 103.244.155.144
+[ec2-user@dev-server ~]$ sudo su -
+Last login: Thu Sep 25 07:07:58 UTC 2025 on pts/1
+[root@dev-server ~]# ls
+[root@dev-server ~]# cd /data/
+[root@dev-server data]# ll
+total 4
+-rw-r--r--. 1 root root 9 Sep 25 07:10 index.html
+[root@dev-server data]# client_loop: send disconnect: Connection reset
+PS C:\Users\10844721\downloads> ssh -i "day-4.pem" ec2-user@ec2-3-238-65-46.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Sep 25 08:13:40 2025 from 103.244.155.144
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Thu Sep 25 08:13:40 2025 from 103.244.155.144
+[ec2-user@dev-server ~]$ sudo su -
+Last login: Thu Sep 25 08:13:45 UTC 2025 on pts/1
+[root@dev-server ~]# ls
+[root@dev-server ~]# cd /data/
+[root@dev-server data]# ls
+index.html
+[root@dev-server data]# vim index.html
+[root@dev-server data]# git add.
+git: 'add.' is not a git command. See 'git --help'.
+
+The most similar command is
+        add
+[root@dev-server data]# git add .
+[root@dev-server data]# git status
+On branch main
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   index.html
+
+[root@dev-server data]# git commit -m dracula index.html
+[main b4a19ef] dracula
+ Committer: root <root@dev-server.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+[root@dev-server data]# git push origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Writing objects: 100% (3/3), 257 bytes | 257.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To github.com:Rahulpr89/devops-sep25.git
+   48d7055..b4a19ef  main -> main
+[root@dev-server data]# ls
+index.html
+[root@dev-server data]# cd
+[root@dev-server ~]# ls
+[root@dev-server ~]# ll
+total 0
+[root@dev-server ~]# cd /data/
+[root@dev-server data]# ls
+index.html
+[root@dev-server data]# cd
+[root@dev-server ~]# mkdir /my-code
+[root@dev-server ~]# cd /my-code/
+[root@dev-server my-code]# git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /my-code/.git/
+[root@dev-server my-code]#

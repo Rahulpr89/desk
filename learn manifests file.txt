@@ -1,0 +1,210 @@
+EC2 with SG    =>
+
+provider "aws" {
+region = "us-east-1"
+access_key = "use yours"  
+secret_key = "use yours"
+}
+
+resource "aws_instance" "dev-server"{
+ami = "ami"
+instance_type = "t3.micro"
+key_name = "kp"
+vpc_security_group_ids = ["${aws_security_group.terra-sg.id}"]
+tags{
+name = "dev-server"
+}
+}
+
+
+resource "aws_security_group" "web_access" {
+        name = "web_access"
+        description = "allow ssh and http"
+
+        ingress {
+                from_port = 80
+                to_port = 80
+                protocol = "tcp"
+                cidr_blocks = ["0.0.0.0/0"]
+        }
+
+        ingress {
+                from_port = 22
+                to_port = 22
+                protocol = "tcp"
+                cidr_blocks = ["0.0.0.0/0"]
+        }
+
+        egress {
+                from_port = 0
+                to_port = 0
+                protocol = "-1"
+                cidr_blocks = ["0.0.0.0/0"]
+        }
+
+
+}
+
+
+NGINX pod   =>
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-name
+spec:
+  containers:
+  - name: container-name
+    image: nginx:1.14
+    ports:
+    - containerPort: give a port no where container should listen
+
+
+deployment manifest file   =>
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: deployment-name
+ labels:
+   app: web //attaching labels to group the resources to identify later 
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+    app: web  //where to apply this deployment like on which pod
+ template:   //template for creating a pod
+   metadata:
+     labels:
+       app: web //this label is attaching with the pods must match with selector matchdata label
+   spec:
+    containers:
+    - name: container-name
+      image: nginx:1.14
+      ports:
+      - containerPort: port of container where container will listen
+
+
+
+
+
+service manifest file   =>
+
+
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-name
+  labels:
+    app: web     //attaching labels so that resources can be grouped
+spec:
+  selector:
+    app: web    //on which resources(that have app:web label) service will be applied
+
+  ports:
+    - port: 8080   //this is the external port
+      targetPort: 8080   //this is the container port where the traffic will be redirected
+
+  type: LoadBalancer    //type of the service LB will distribute/route the traffic
+
+
+
+
+hpa manifest file =>
+
+
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+ name: hpa-name   
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: deployment-name   //give deployment name to whom you want to scale
+ minReplicas: 4   //at least this much will be always there
+ maxReplicas: 10
+ metrics:
+   - type: Resource   //will monitor on resources like cpu or memory
+     resource:   //give resources that will be monitored
+       name: cpu  //like monitor cpu
+       target:
+         type: Utilization
+         averageUtilization: 50     //scale when utilization reaches to >= 50
+
+
+
+
+
+
+Playbook for httpd =>
+
+
+---
+- name: tasks
+  hosts: all
+  tasks:
+
+    - name: Install httpd
+      dnf:
+        name: httpd
+        state: latest
+
+    - name: Start and enable httpd service
+      service:          //can also write systemd in place of service
+        name: httpd
+        state: started
+        enabled: true
+...
+
+
+
+playbook for multiple user using ansible loop  =>
+
+
+
+---
+- name: creating users
+  hosts: all
+  tasks:
+   - name: Creating user
+     user:
+      name: "{{ item }}"
+      state: present
+     with_items:
+      - qwer
+      - abc
+      - xyz
+...
+
+
+
+Dockerfile 
+
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y apache2
+
+RUN apt-get install -y tree openssh-server openssh-client
+
+RUN echo "I Love Devops" > /var/www/html/index.html
+
+CMD ["apache2ctl", "-D", "FOREGROUND"]
+
+EXPOSE 80
+
+
+
+
+
+
+
+
+
+
+
+
+

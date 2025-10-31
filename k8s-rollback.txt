@@ -1,0 +1,839 @@
+root@control-plane:/k8s-code# kubectl get node -o wide
+NAME                        STATUS   ROLES           AGE     VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION   CONTAINER-RUNTIME
+control-plane.example.com   Ready    control-plane   9m36s   v1.32.0   172.31.12.128   <none>        Ubuntu 22.04.5 LTS   6.8.0-1035-aws   cri-o://1.33.0
+node-one.example.com        Ready    <none>          2m38s   v1.32.0   172.31.11.76    <none>        Ubuntu 22.04.5 LTS   6.8.0-1035-aws   cri-o://1.33.0
+node-two.example.com        Ready    <none>          3m41s   v1.32.0   172.31.7.160    <none>        Ubuntu 22.04.5 LTS   6.8.0-1035-aws   cri-o://1.33.0
+root@control-plane:/k8s-code# vim deployment-pod.yaml
+root@control-plane:/k8s-code# kubectl apply -f deployment-pod.yaml
+deployment.apps/my-nginx-deployment created
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   0          15s
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   0          15s
+my-nginx-deployment-96b9d695-glxct   1/1     Running   0          15s
+root@control-plane:/k8s-code# client_loop: send disconnect: Connection reset
+PS C:\Users\10844721\downloads> ssh -i "day-14.pem" ubuntu@ec2-18-215-188-116.compute-1.amazonaws.com
+The authenticity of host 'ec2-18-215-188-116.compute-1.amazonaws.com (18.215.188.116)' can't be established.
+ED25519 key fingerprint is SHA256:7+KFdK978ZC3rXGr/geCGGN9AgZKuYqCY9fTIiXYrEo.
+This host key is known by the following other names/addresses:
+    C:\Users\10844721/.ssh/known_hosts:143: ec2-44-213-124-50.compute-1.amazonaws.com
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-18-215-188-116.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 6.8.0-1035-aws x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu Oct  9 09:52:42 UTC 2025
+
+  System load:  0.1                Processes:                186
+  Usage of /:   27.7% of 14.36GB   Users logged in:          0
+  Memory usage: 19%                IPv4 address for enp39s0: 172.31.12.128
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+30 updates can be applied immediately.
+20 of these updates are standard security updates.
+To see these additional updates run: apt list --upgradable
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Thu Oct  9 03:44:06 2025 from 103.244.155.144
+ubuntu@control-plane:~$ sudo su -
+root@control-plane:~# cd /k8s-code
+root@control-plane:/k8s-code# ll
+total 12
+drwxr-xr-x  2 root root 4096 Oct  9 04:18 ./
+drwxr-xr-x 20 root root 4096 Oct  9 09:49 ../
+-rw-r--r--  1 root root  319 Oct  9 04:18 deployment-pod.yaml
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          5h39m
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          5h39m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          5h39m
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+"deployment-hpa.yaml" [New] 18L, 423B written
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+root@control-plane:/k8s-code# kubectl apply -f deployment-hpa.yaml
+horizontalpodautoscaler.autoscaling/my-hpa-devops created
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          5h43m
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          5h43m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          5h43m
+root@control-plane:/k8s-code# kubectl watch pod
+error: unknown command "watch" for "kubectl"
+
+Did you mean this?
+        patch
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          5h44m
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          5h44m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          5h44m
+root@control-plane:/k8s-code# cat deployment-hpa.yaml
+    apiVersion: autoscaling/v2
+    kind: HorizontalPodAutoscaler
+    metadata:
+      name: my-hpa-devops
+    spec:
+      scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: nginx-deployment
+      minReplicas: 4
+      maxReplicas: 10
+      metrics:
+      - type: Resource
+        resource:
+          name: cpu
+          target:
+            type: Utilization
+            averageUtilization: 25
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          5h45m
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          5h45m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          5h45m
+root@control-plane:/k8s-code# kubectl get deploy
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+my-nginx-deployment   3/3     3            3           5h45m
+root@control-plane:/k8s-code# kubectl get hpa
+NAME            REFERENCE                     TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+my-hpa-devops   Deployment/nginx-deployment   cpu: <unknown>/25%   4         10        0          4m27s
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+root@control-plane:/k8s-code# kubectl apply -f deployment-hpa.yaml
+deployment.apps/nginx-deployment created
+root@control-plane:/k8s-code# kubectl get hpa
+NAME            REFERENCE                     TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+my-hpa-devops   Deployment/nginx-deployment   cpu: <unknown>/25%   4         10        4          10m
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          5h55m
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          5h55m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          5h55m
+nginx-deployment-577564d6f7-46n86    1/1     Running   0          2m3s
+nginx-deployment-577564d6f7-4gfdg    1/1     Running   0          2m3s
+nginx-deployment-577564d6f7-hnxkt    1/1     Running   0          2m3s
+nginx-deployment-577564d6f7-khpq6    1/1     Running   0          2m3s
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+root@control-plane:/k8s-code# vim deployment.yaml
+root@control-plane:/k8s-code# ll
+total 16
+drwxr-xr-x  2 root root 4096 Oct  9 10:15 ./
+drwxr-xr-x 20 root root 4096 Oct  9 09:49 ../
+-rw-r--r--  1 root root  446 Oct  9 10:11 deployment-hpa.yaml
+-rw-r--r--  1 root root  319 Oct  9 04:18 deployment-pod.yaml
+root@control-plane:/k8s-code# vim deployment-pod.yaml
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+root@control-plane:/k8s-code#  kubectl apply -f deployment-hpa.yaml
+deployment.apps/nginx-deployment configured
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          5h59m
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          5h59m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          5h59m
+nginx-deployment-577564d6f7-gqggr    1/1     Running   0          2s
+nginx-deployment-577564d6f7-hnxkt    1/1     Running   0          6m22s
+nginx-deployment-577564d6f7-hq6x8    1/1     Running   0          2s
+nginx-deployment-577564d6f7-qtlt9    1/1     Running   0          2s
+root@control-plane:/k8s-code# cat deployment-hpa.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "200m"
+root@control-plane:/k8s-code# kubectl get hpa
+NAME            REFERENCE                     TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+my-hpa-devops   Deployment/nginx-deployment   cpu: <unknown>/25%   4         10        4          21m
+root@control-plane:/k8s-code# kubectl delete pod my-hpa-devops
+Error from server (NotFound): pods "my-hpa-devops" not found
+root@control-plane:/k8s-code# kubectl get rs
+NAME                           DESIRED   CURRENT   READY   AGE
+my-nginx-deployment-96b9d695   3         3         3       6h6m
+nginx-deployment-577564d6f7    4         4         4       13m
+root@control-plane:/k8s-code# kubectl delete hpa my-hpa-devops
+horizontalpodautoscaler.autoscaling "my-hpa-devops" deleted
+root@control-plane:/k8s-code# kubectl get hpa
+No resources found in default namespace.
+root@control-plane:/k8s-code# vim deployment-hpa.vim
+root@control-plane:/k8s-code# vim deployment-hpa.vim
+"deployment-hpa.vim" [New] 18L, 423B written
+root@control-plane:/k8s-code# rm deployment-hpa.vim
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+ 18L, 423B written
+root@control-plane:/k8s-code# kubectl apply -f deployment-hpa.yaml
+horizontalpodautoscaler.autoscaling/my-hpa-devops created
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          6h12m
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          6h12m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          6h12m
+nginx-deployment-577564d6f7-gqggr    1/1     Running   0          13m
+nginx-deployment-577564d6f7-hnxkt    1/1     Running   0          19m
+nginx-deployment-577564d6f7-hq6x8    1/1     Running   0          13m
+nginx-deployment-577564d6f7-qtlt9    1/1     Running   0          13m
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+root@control-plane:/k8s-code# kubectl apply -f deployment-hpa.yaml
+horizontalpodautoscaler.autoscaling/my-hpa-devops configured
+root@control-plane:/k8s-code# kubectl get node
+NAME                        STATUS   ROLES           AGE     VERSION
+control-plane.example.com   Ready    control-plane   6h46m   v1.32.0
+node-one.example.com        Ready    <none>          6h39m   v1.32.0
+node-two.example.com        Ready    <none>          6h40m   v1.32.0
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          6h13m
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          6h13m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          6h13m
+nginx-deployment-577564d6f7-gqggr    1/1     Running   0          14m
+nginx-deployment-577564d6f7-hnxkt    1/1     Running   0          20m
+nginx-deployment-577564d6f7-hq6x8    1/1     Running   0          14m
+nginx-deployment-577564d6f7-qtlt9    1/1     Running   0          14m
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          6h14m
+my-nginx-deployment-96b9d695-9l2cq   1/1     Running   0          11s
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          6h14m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          6h14m
+nginx-deployment-577564d6f7-gqggr    1/1     Running   0          14m
+nginx-deployment-577564d6f7-hnxkt    1/1     Running   0          21m
+nginx-deployment-577564d6f7-hq6x8    1/1     Running   0          14m
+nginx-deployment-577564d6f7-qtlt9    1/1     Running   0          14m
+root@control-plane:/k8s-code# kubectl get rs
+NAME                           DESIRED   CURRENT   READY   AGE
+my-nginx-deployment-96b9d695   4         4         4       6h14m
+nginx-deployment-577564d6f7    4         4         4       21m
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-6mwdb   1/1     Running   1          6h14m
+my-nginx-deployment-96b9d695-9l2cq   1/1     Running   0          41s
+my-nginx-deployment-96b9d695-cbdmn   1/1     Running   1          6h14m
+my-nginx-deployment-96b9d695-glxct   1/1     Running   1          6h14m
+nginx-deployment-577564d6f7-gqggr    1/1     Running   0          15m
+nginx-deployment-577564d6f7-hnxkt    1/1     Running   0          21m
+nginx-deployment-577564d6f7-hq6x8    1/1     Running   0          15m
+nginx-deployment-577564d6f7-qtlt9    1/1     Running   0          15m
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+root@control-plane:/k8s-code# vim deployment.yaml
+root@control-plane:/k8s-code# vim deployment-pod.yaml
+root@control-plane:/k8s-code# ll
+total 16
+drwxr-xr-x  2 root root 4096 Oct  9 10:35 ./
+drwxr-xr-x 20 root root 4096 Oct  9 09:49 ../
+-rw-r--r--  1 root root  426 Oct  9 10:32 deployment-hpa.yaml
+-rw-r--r--  1 root root  319 Oct  9 04:18 deployment-pod.yaml
+root@control-plane:/k8s-code# vim deployment-pod.yaml
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+root@control-plane:/k8s-code# kubectl get rs
+NAME                           DESIRED   CURRENT   READY   AGE
+my-nginx-deployment-96b9d695   4         4         4       6h21m
+nginx-deployment-577564d6f7    4         4         4       28m
+root@control-plane:/k8s-code# kubectl delete rs my-nginx-deployment-96b9d695
+replicaset.apps "my-nginx-deployment-96b9d695" deleted
+root@control-plane:/k8s-code# kubectl get rs
+NAME                           DESIRED   CURRENT   READY   AGE
+my-nginx-deployment-96b9d695   4         4         4       8s
+nginx-deployment-577564d6f7    4         4         4       28m
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-8xmm8   1/1     Running   0          31s
+my-nginx-deployment-96b9d695-9xpcp   1/1     Running   0          31s
+my-nginx-deployment-96b9d695-cjprw   1/1     Running   0          31s
+my-nginx-deployment-96b9d695-vcxk2   1/1     Running   0          31s
+nginx-deployment-577564d6f7-gqggr    1/1     Running   0          22m
+nginx-deployment-577564d6f7-hnxkt    1/1     Running   0          29m
+nginx-deployment-577564d6f7-hq6x8    1/1     Running   0          22m
+nginx-deployment-577564d6f7-qtlt9    1/1     Running   0          22m
+root@control-plane:/k8s-code# kubectl delete pod nginx-deployment*
+Error from server (NotFound): pods "nginx-deployment*" not found
+root@control-plane:/k8s-code# kubectl delete pod nginx-deployment
+Error from server (NotFound): pods "nginx-deployment" not found
+root@control-plane:/k8s-code# kubectl get rs
+NAME                           DESIRED   CURRENT   READY   AGE
+my-nginx-deployment-96b9d695   4         4         4       110s
+nginx-deployment-577564d6f7    4         4         4       30m
+root@control-plane:/k8s-code# kubectl os-resources
+error: unknown command "os-resources" for "kubectl"
+root@control-plane:/k8s-code# kubectl os-resource
+error: unknown command "os-resource" for "kubectl"
+root@control-plane:/k8s-code# kubectl os-resourses
+error: unknown command "os-resourses" for "kubectl"
+root@control-plane:/k8s-code# kubectl get os-resource
+error: the server doesn't have a resource type "os-resource"
+root@control-plane:/k8s-code# kubectl get os-resources
+error: the server doesn't have a resource type "os-resources"
+root@control-plane:/k8s-code# kubectl api-resource
+error: unknown command "api-resource" for "kubectl"
+
+Did you mean this?
+        api-resources
+root@control-plane:/k8s-code# kubectl api-resources
+NAME                                SHORTNAMES   APIVERSION                        NAMESPACED   KIND
+bindings                                         v1                                true         Binding
+componentstatuses                   cs           v1                                false        ComponentStatus
+configmaps                          cm           v1                                true         ConfigMap
+endpoints                           ep           v1                                true         Endpoints
+events                              ev           v1                                true         Event
+limitranges                         limits       v1                                true         LimitRange
+namespaces                          ns           v1                                false        Namespace
+nodes                               no           v1                                false        Node
+persistentvolumeclaims              pvc          v1                                true         PersistentVolumeClaim
+persistentvolumes                   pv           v1                                false        PersistentVolume
+pods                                po           v1                                true         Pod
+podtemplates                                     v1                                true         PodTemplate
+replicationcontrollers              rc           v1                                true         ReplicationController
+resourcequotas                      quota        v1                                true         ResourceQuota
+secrets                                          v1                                true         Secret
+serviceaccounts                     sa           v1                                true         ServiceAccount
+services                            svc          v1                                true         Service
+mutatingwebhookconfigurations                    admissionregistration.k8s.io/v1   false        MutatingWebhookConfiguration
+validatingadmissionpolicies                      admissionregistration.k8s.io/v1   false        ValidatingAdmissionPolicy
+validatingadmissionpolicybindings                admissionregistration.k8s.io/v1   false        ValidatingAdmissionPolicyBinding
+validatingwebhookconfigurations                  admissionregistration.k8s.io/v1   false        ValidatingWebhookConfiguration
+customresourcedefinitions           crd,crds     apiextensions.k8s.io/v1           false        CustomResourceDefinition
+apiservices                                      apiregistration.k8s.io/v1         false        APIService
+controllerrevisions                              apps/v1                           true         ControllerRevision
+daemonsets                          ds           apps/v1                           true         DaemonSet
+deployments                         deploy       apps/v1                           true         Deployment
+replicasets                         rs           apps/v1                           true         ReplicaSet
+statefulsets                        sts          apps/v1                           true         StatefulSet
+selfsubjectreviews                               authentication.k8s.io/v1          false        SelfSubjectReview
+tokenreviews                                     authentication.k8s.io/v1          false        TokenReview
+localsubjectaccessreviews                        authorization.k8s.io/v1           true         LocalSubjectAccessReview
+selfsubjectaccessreviews                         authorization.k8s.io/v1           false        SelfSubjectAccessReview
+selfsubjectrulesreviews                          authorization.k8s.io/v1           false        SelfSubjectRulesReview
+subjectaccessreviews                             authorization.k8s.io/v1           false        SubjectAccessReview
+horizontalpodautoscalers            hpa          autoscaling/v2                    true         HorizontalPodAutoscaler
+cronjobs                            cj           batch/v1                          true         CronJob
+jobs                                             batch/v1                          true         Job
+certificatesigningrequests          csr          certificates.k8s.io/v1            false        CertificateSigningRequest
+leases                                           coordination.k8s.io/v1            true         Lease
+bgpconfigurations                                crd.projectcalico.org/v1          false        BGPConfiguration
+bgpfilters                                       crd.projectcalico.org/v1          false        BGPFilter
+bgppeers                                         crd.projectcalico.org/v1          false        BGPPeer
+blockaffinities                                  crd.projectcalico.org/v1          false        BlockAffinity
+caliconodestatuses                               crd.projectcalico.org/v1          false        CalicoNodeStatus
+clusterinformations                              crd.projectcalico.org/v1          false        ClusterInformation
+felixconfigurations                              crd.projectcalico.org/v1          false        FelixConfiguration
+globalnetworkpolicies                            crd.projectcalico.org/v1          false        GlobalNetworkPolicy
+globalnetworksets                                crd.projectcalico.org/v1          false        GlobalNetworkSet
+hostendpoints                                    crd.projectcalico.org/v1          false        HostEndpoint
+ipamblocks                                       crd.projectcalico.org/v1          false        IPAMBlock
+ipamconfigs                                      crd.projectcalico.org/v1          false        IPAMConfig
+ipamhandles                                      crd.projectcalico.org/v1          false        IPAMHandle
+ippools                                          crd.projectcalico.org/v1          false        IPPool
+ipreservations                                   crd.projectcalico.org/v1          false        IPReservation
+kubecontrollersconfigurations                    crd.projectcalico.org/v1          false        KubeControllersConfiguration
+networkpolicies                                  crd.projectcalico.org/v1          true         NetworkPolicy
+networksets                                      crd.projectcalico.org/v1          true         NetworkSet
+endpointslices                                   discovery.k8s.io/v1               true         EndpointSlice
+events                              ev           events.k8s.io/v1                  true         Event
+flowschemas                                      flowcontrol.apiserver.k8s.io/v1   false        FlowSchema
+prioritylevelconfigurations                      flowcontrol.apiserver.k8s.io/v1   false        PriorityLevelConfiguration
+ingressclasses                                   networking.k8s.io/v1              false        IngressClass
+ingresses                           ing          networking.k8s.io/v1              true         Ingress
+networkpolicies                     netpol       networking.k8s.io/v1              true         NetworkPolicy
+runtimeclasses                                   node.k8s.io/v1                    false        RuntimeClass
+poddisruptionbudgets                pdb          policy/v1                         true         PodDisruptionBudget
+clusterrolebindings                              rbac.authorization.k8s.io/v1      false        ClusterRoleBinding
+clusterroles                                     rbac.authorization.k8s.io/v1      false        ClusterRole
+rolebindings                                     rbac.authorization.k8s.io/v1      true         RoleBinding
+roles                                            rbac.authorization.k8s.io/v1      true         Role
+priorityclasses                     pc           scheduling.k8s.io/v1              false        PriorityClass
+csidrivers                                       storage.k8s.io/v1                 false        CSIDriver
+csinodes                                         storage.k8s.io/v1                 false        CSINode
+csistoragecapacities                             storage.k8s.io/v1                 true         CSIStorageCapacity
+storageclasses                      sc           storage.k8s.io/v1                 false        StorageClass
+volumeattachments                                storage.k8s.io/v1                 false        VolumeAttachment
+root@control-plane:/k8s-code# kubectl get deploy
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+my-nginx-deployment   4/4     4            4           6h25m
+nginx-deployment      4/4     4            4           32m
+root@control-plane:/k8s-code# kubectl delete deploy nginx-deployment
+deployment.apps "nginx-deployment" deleted
+root@control-plane:/k8s-code# kubectl get pos
+error: the server doesn't have a resource type "pos"
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-8xmm8   1/1     Running   0          4m45s
+my-nginx-deployment-96b9d695-9xpcp   1/1     Running   0          4m45s
+my-nginx-deployment-96b9d695-cjprw   1/1     Running   0          4m45s
+my-nginx-deployment-96b9d695-vcxk2   1/1     Running   0          4m45s
+root@control-plane:/k8s-code# vim deployment-pod.yaml
+root@control-plane:/k8s-code# kubectl apply -f deployment-pod.yaml
+deployment.apps/my-nginx-deployment configured
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-8xmm8   1/1     Running   0          5m50s
+my-nginx-deployment-96b9d695-9xpcp   1/1     Running   0          5m50s
+my-nginx-deployment-96b9d695-b4pc8   1/1     Running   0          12s
+my-nginx-deployment-96b9d695-vcxk2   1/1     Running   0          5m50s
+root@control-plane:/k8s-code# vim deployment-pod.yaml
+root@control-plane:/k8s-code# vim deployment-hpa.yaml
+root@control-plane:/k8s-code# kubectl apply -f deployment-yaml.yaml
+error: the path "deployment-yaml.yaml" does not exist
+root@control-plane:/k8s-code# kubectl apply -f deployment-hpa.yaml
+horizontalpodautoscaler.autoscaling/my-hpa-devops configured
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-8xmm8   1/1     Running   0          8m18s
+my-nginx-deployment-96b9d695-9xpcp   1/1     Running   0          8m18s
+my-nginx-deployment-96b9d695-b4pc8   1/1     Running   0          2m40s
+my-nginx-deployment-96b9d695-vcxk2   1/1     Running   0          8m18s
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-8xmm8   1/1     Running   0          8m29s
+my-nginx-deployment-96b9d695-9xpcp   1/1     Running   0          8m29s
+my-nginx-deployment-96b9d695-b4pc8   1/1     Running   0          2m51s
+my-nginx-deployment-96b9d695-nf4w8   1/1     Running   0          6s
+my-nginx-deployment-96b9d695-r5xmx   1/1     Running   0          6s
+my-nginx-deployment-96b9d695-shdq4   1/1     Running   0          6s
+my-nginx-deployment-96b9d695-vcxk2   1/1     Running   0          8m29s
+my-nginx-deployment-96b9d695-vf8t6   1/1     Running   0          6s
+root@control-plane:/k8s-code# cat deployment-hpa.yaml
+    apiVersion: autoscaling/v2
+    kind: HorizontalPodAutoscaler
+    metadata:
+      name: my-hpa-devops
+    spec:
+      scaleTargetRef:
+        apiVersion: apps/v1
+        kind: Deployment
+        name: my-nginx-deployment
+      minReplicas: 8
+      maxReplicas: 10
+      metrics:
+      - type: Resource
+        resource:
+          name: cpu
+          target:
+            type: Utilization
+            averageUtilization: 25
+root@control-plane:/k8s-code# vim deployment-pod.yaml
+root@control-plane:/k8s-code# kubectl apply -f deployment-pod.yaml
+deployment.apps/my-nginx-deployment configured
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-8xmm8   1/1     Running   0          10m
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-8xmm8   1/1     Running   0          10m
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-2zcfn   1/1     Running   0          13s
+my-nginx-deployment-96b9d695-7trdl   1/1     Running   0          13s
+my-nginx-deployment-96b9d695-8xmm8   1/1     Running   0          10m
+my-nginx-deployment-96b9d695-cjjph   1/1     Running   0          13s
+my-nginx-deployment-96b9d695-ftdt6   1/1     Running   0          13s
+my-nginx-deployment-96b9d695-kpv7z   1/1     Running   0          13s
+my-nginx-deployment-96b9d695-kxbpq   1/1     Running   0          13s
+my-nginx-deployment-96b9d695-zrlhl   1/1     Running   0          13s
+root@control-plane:/k8s-code# kubectl set image deployment.v1.apps/my-nginx-deployment nginx=nginx:1.16.1
+deployment.apps/my-nginx-deployment image updated
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                   READY   STATUS              RESTARTS   AGE
+my-nginx-deployment-76b9fd6c85-8xqlp   0/1     ContainerCreating   0          0s
+my-nginx-deployment-76b9fd6c85-gwhqz   1/1     Running             0          5s
+my-nginx-deployment-76b9fd6c85-j4rtn   0/1     ContainerCreating   0          0s
+my-nginx-deployment-76b9fd6c85-jqxcl   0/1     ContainerCreating   0          0s
+my-nginx-deployment-76b9fd6c85-lfl8m   1/1     Running             0          5s
+my-nginx-deployment-76b9fd6c85-mgt8w   1/1     Running             0          5s
+my-nginx-deployment-76b9fd6c85-nwzsh   1/1     Running             0          5s
+my-nginx-deployment-76b9fd6c85-tp4cp   0/1     ContainerCreating   0          0s
+my-nginx-deployment-96b9d695-7trdl     1/1     Terminating         0          3m27s
+my-nginx-deployment-96b9d695-8xmm8     1/1     Running             0          13m
+my-nginx-deployment-96b9d695-ftdt6     1/1     Terminating         0          3m27s
+my-nginx-deployment-96b9d695-kpv7z     1/1     Terminating         0          3m27s
+my-nginx-deployment-96b9d695-kxbpq     1/1     Running             0          3m27s
+my-nginx-deployment-96b9d695-zrlhl     1/1     Terminating         0          3m27s
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                   READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-76b9fd6c85-8xqlp   1/1     Running   0          30s
+my-nginx-deployment-76b9fd6c85-gwhqz   1/1     Running   0          35s
+my-nginx-deployment-76b9fd6c85-j4rtn   1/1     Running   0          30s
+my-nginx-deployment-76b9fd6c85-jqxcl   1/1     Running   0          30s
+my-nginx-deployment-76b9fd6c85-lfl8m   1/1     Running   0          35s
+my-nginx-deployment-76b9fd6c85-mgt8w   1/1     Running   0          35s
+my-nginx-deployment-76b9fd6c85-nwzsh   1/1     Running   0          35s
+my-nginx-deployment-76b9fd6c85-tp4cp   1/1     Running   0          30s
+root@control-plane:/k8s-code# kubectl get deploy
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+my-nginx-deployment   8/8     8            8           6h36m
+root@control-plane:/k8s-code# kubectl describe pod my-nginx-deployment-76b9fd6c85-lfl8m
+Name:             my-nginx-deployment-76b9fd6c85-lfl8m
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node-one.example.com/172.31.11.76
+Start Time:       Thu, 09 Oct 2025 10:53:59 +0000
+Labels:           app=nginx
+                  pod-template-hash=76b9fd6c85
+Annotations:      cni.projectcalico.org/containerID: b52bb0f6264243475933480d094df19e0459bdef24e03428aea9bf194fe883a2
+                  cni.projectcalico.org/podIP: 192.168.192.145/32
+                  cni.projectcalico.org/podIPs: 192.168.192.145/32
+Status:           Running
+IP:               192.168.192.145
+IPs:
+  IP:           192.168.192.145
+Controlled By:  ReplicaSet/my-nginx-deployment-76b9fd6c85
+Containers:
+  nginx:
+    Container ID:   cri-o://f285393c6f248ba349abb0fc39bfffb128487a81ece7a7d4bed0db0a919e0acd
+    Image:          nginx:1.16.1
+    Image ID:       docker.io/library/nginx@sha256:2963fc49cc50883ba9af25f977a9997ff9af06b45c12d968b7985dc1e9254e4b
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Thu, 09 Oct 2025 10:54:04 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-sdbqw (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-sdbqw:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  105s  default-scheduler  Successfully assigned default/my-nginx-deployment-76b9fd6c85-lfl8m to node-one.example.com
+  Normal  Pulling    105s  kubelet            Pulling image "nginx:1.16.1"
+  Normal  Pulled     100s  kubelet            Successfully pulled image "nginx:1.16.1" in 4.222s (4.222s including waiting). Image size: 130521825 bytes.
+  Normal  Created    100s  kubelet            Created container: nginx
+  Normal  Started    100s  kubelet            Started container nginx
+root@control-plane:/k8s-code# kubectl describe deploy my-nginx-deployment
+Name:                   my-nginx-deployment
+Namespace:              default
+CreationTimestamp:      Thu, 09 Oct 2025 04:18:41 +0000
+Labels:                 <none>
+Annotations:            deployment.kubernetes.io/revision: 2
+Selector:               app=nginx
+Replicas:               8 desired | 8 updated | 8 total | 8 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   nginx:
+    Image:         nginx:1.16.1
+    Port:          80/TCP
+    Host Port:     0/TCP
+    Environment:   <none>
+    Mounts:        <none>
+  Volumes:         <none>
+  Node-Selectors:  <none>
+  Tolerations:     <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  my-nginx-deployment-96b9d695 (0/0 replicas created)
+NewReplicaSet:   my-nginx-deployment-76b9fd6c85 (8/8 replicas created)
+Events:
+  Type    Reason             Age                     From                   Message
+  ----    ------             ----                    ----                   -------
+  Normal  ScalingReplicaSet  23m                     deployment-controller  Scaled up replica set my-nginx-deployment-96b9d695 from 0 to 4
+  Normal  ScalingReplicaSet  17m                     deployment-controller  Scaled down replica set my-nginx-deployment-96b9d695 from 4 to 3
+  Normal  ScalingReplicaSet  17m (x2 over 31m)       deployment-controller  Scaled up replica set my-nginx-deployment-96b9d695 from 3 to 4
+  Normal  ScalingReplicaSet  15m                     deployment-controller  Scaled up replica set my-nginx-deployment-96b9d695 from 4 to 8
+  Normal  ScalingReplicaSet  13m                     deployment-controller  Scaled down replica set my-nginx-deployment-96b9d695 from 8 to 1
+  Normal  ScalingReplicaSet  13m                     deployment-controller  Scaled up replica set my-nginx-deployment-96b9d695 from 1 to 8
+  Normal  ScalingReplicaSet  9m40s                   deployment-controller  Scaled up replica set my-nginx-deployment-76b9fd6c85 from 0 to 2
+  Normal  ScalingReplicaSet  9m40s                   deployment-controller  Scaled down replica set my-nginx-deployment-96b9d695 from 8 to 6
+  Normal  ScalingReplicaSet  9m40s                   deployment-controller  Scaled up replica set my-nginx-deployment-76b9fd6c85 from 2 to 4
+  Normal  ScalingReplicaSet  9m34s (x10 over 9m35s)  deployment-controller  (combined from similar events): Scaled down replica set my-nginx-deployment-96b9d695 from 1 to 0
+root@control-plane:/k8s-code# kubectl edit deploy my-nginx-deployment
+deployment.apps/my-nginx-deployment edited
+"/tmp/kubectl-edit-3100922812.yaml" 69L, 2247B written
+deployment.apps/my-nginx-deployment edited
+root@control-plane:/k8s-code# kubectl get pod --watch
+NAME                                   READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-54d948ddb9-2txk4   1/1     Running   0          46s
+my-nginx-deployment-54d948ddb9-5vlxm   1/1     Running   0          51s
+my-nginx-deployment-54d948ddb9-5wqt5   1/1     Running   0          46s
+my-nginx-deployment-54d948ddb9-cbkv4   1/1     Running   0          51s
+my-nginx-deployment-54d948ddb9-kfx86   1/1     Running   0          45s
+my-nginx-deployment-54d948ddb9-nj6bg   1/1     Running   0          51s
+my-nginx-deployment-54d948ddb9-nprs5   1/1     Running   0          51s
+my-nginx-deployment-54d948ddb9-qcmbx   1/1     Running   0          46s
+^Croot@control-plane:/k8s-code# kubectl get pod -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE   IP                NODE                   NOMINATED NODE   READINESS GATES
+my-nginx-deployment-54d948ddb9-2txk4   1/1     Running   0          89s   192.168.72.213    node-two.example.com   <none>           <none>
+my-nginx-deployment-54d948ddb9-5vlxm   1/1     Running   0          94s   192.168.72.211    node-two.example.com   <none>           <none>
+my-nginx-deployment-54d948ddb9-5wqt5   1/1     Running   0          89s   192.168.72.214    node-two.example.com   <none>           <none>
+my-nginx-deployment-54d948ddb9-cbkv4   1/1     Running   0          94s   192.168.72.212    node-two.example.com   <none>           <none>
+my-nginx-deployment-54d948ddb9-kfx86   1/1     Running   0          88s   192.168.192.152   node-one.example.com   <none>           <none>
+my-nginx-deployment-54d948ddb9-nj6bg   1/1     Running   0          94s   192.168.192.150   node-one.example.com   <none>           <none>
+my-nginx-deployment-54d948ddb9-nprs5   1/1     Running   0          94s   192.168.192.149   node-one.example.com   <none>           <none>
+my-nginx-deployment-54d948ddb9-qcmbx   1/1     Running   0          89s   192.168.192.151   node-one.example.com   <none>           <none>
+root@control-plane:/k8s-code# kubectl describe pod my-nginx-deployment-54d948ddb9-qcmbx
+Name:             my-nginx-deployment-54d948ddb9-qcmbx
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node-one.example.com/172.31.11.76
+Start Time:       Thu, 09 Oct 2025 11:05:38 +0000
+Labels:           app=nginx
+                  pod-template-hash=54d948ddb9
+Annotations:      cni.projectcalico.org/containerID: d136a298ffbdfce691f830c90af238753bec5e9bde500969cbe96b0a484646a3
+                  cni.projectcalico.org/podIP: 192.168.192.151/32
+                  cni.projectcalico.org/podIPs: 192.168.192.151/32
+Status:           Running
+IP:               192.168.192.151
+IPs:
+  IP:           192.168.192.151
+Controlled By:  ReplicaSet/my-nginx-deployment-54d948ddb9
+Containers:
+  nginx:
+    Container ID:   cri-o://e7019da8984fdfed1e0be07dd5627aa1c2b00a56633f3e5c88a47be0ba3bb118
+    Image:          nginx:1.20
+    Image ID:       docker.io/library/nginx@sha256:38f8c1d9613f3f42e7969c3b1dd5c3277e635d4576713e6453c6193e66270a6d
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Thu, 09 Oct 2025 11:05:39 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-z8ndk (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-z8ndk:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  116s  default-scheduler  Successfully assigned default/my-nginx-deployment-54d948ddb9-qcmbx to node-one.example.com
+  Normal  Pulling    116s  kubelet            Pulling image "nginx:1.20"
+  Normal  Pulled     116s  kubelet            Successfully pulled image "nginx:1.20" in 283ms (283ms including waiting). Image size: 145905502 bytes.
+  Normal  Created    116s  kubelet            Created container: nginx
+  Normal  Started    116s  kubelet            Started container nginx
+root@control-plane:/k8s-code# kubectl get history
+error: the server doesn't have a resource type "history"
+root@control-plane:/k8s-code#  kubectl rollout undo deployment/my-nginx-deployment
+deployment.apps/my-nginx-deployment rolled back
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                   READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-76b9fd6c85-29j8h   1/1     Running   0          4s
+my-nginx-deployment-76b9fd6c85-2j8ff   1/1     Running   0          5s
+my-nginx-deployment-76b9fd6c85-2vf62   1/1     Running   0          5s
+my-nginx-deployment-76b9fd6c85-5qn7g   1/1     Running   0          5s
+my-nginx-deployment-76b9fd6c85-kgzhm   1/1     Running   0          4s
+my-nginx-deployment-76b9fd6c85-wzfjm   1/1     Running   0          4s
+my-nginx-deployment-76b9fd6c85-z47gf   1/1     Running   0          5s
+my-nginx-deployment-76b9fd6c85-zptwx   1/1     Running   0          4s
+root@control-plane:/k8s-code# kubectl describe pod my-nginx-deployment-76b9fd6c85-zptwx
+Name:             my-nginx-deployment-76b9fd6c85-zptwx
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             node-two.example.com/172.31.7.160
+Start Time:       Thu, 09 Oct 2025 11:10:24 +0000
+Labels:           app=nginx
+                  pod-template-hash=76b9fd6c85
+Annotations:      cni.projectcalico.org/containerID: 7aeb909abe6e52c97c4c60decdfa5cc54c0a422a7ef7cfa43e561b431d394dc3
+                  cni.projectcalico.org/podIP: 192.168.72.218/32
+                  cni.projectcalico.org/podIPs: 192.168.72.218/32
+Status:           Running
+IP:               192.168.72.218
+IPs:
+  IP:           192.168.72.218
+Controlled By:  ReplicaSet/my-nginx-deployment-76b9fd6c85
+Containers:
+  nginx:
+    Container ID:   cri-o://a8348c3c0c596827b4293856d33df7e7e6d19241a01e43a0a54c148c64ee2b33
+    Image:          nginx:1.16.1
+    Image ID:       docker.io/library/nginx@sha256:2963fc49cc50883ba9af25f977a9997ff9af06b45c12d968b7985dc1e9254e4b
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Thu, 09 Oct 2025 11:10:24 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-lzzh4 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True
+  Initialized                 True
+  Ready                       True
+  ContainersReady             True
+  PodScheduled                True
+Volumes:
+  kube-api-access-lzzh4:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  27s   default-scheduler  Successfully assigned default/my-nginx-deployment-76b9fd6c85-zptwx to node-two.example.com
+  Normal  Pulling    27s   kubelet            Pulling image "nginx:1.16.1"
+  Normal  Pulled     27s   kubelet            Successfully pulled image "nginx:1.16.1" in 209ms (209ms including waiting). Image size: 130521825 bytes.
+  Normal  Created    27s   kubelet            Created container: nginx
+  Normal  Started    27s   kubelet            Started container nginx
+root@control-plane:/k8s-code# kubectl create ns dev-env
+namespace/dev-env created
+root@control-plane:/k8s-code# kubectl get ns
+NAME              STATUS   AGE
+default           Active   7h26m
+dev-env           Active   44s
+kube-node-lease   Active   7h26m
+kube-public       Active   7h26m
+kube-system       Active   7h26m
+root@control-plane:/k8s-code# kubectl apply -f deployment-pod.yaml --namespace=dev-env
+deployment.apps/my-nginx-deployment created
+root@control-plane:/k8s-code# kubectl get pod -n dev-env
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-kr5sq   1/1     Running   0          14s
+root@control-plane:/k8s-code# kubectl get deploy
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+my-nginx-deployment   8/8     8            8           7h6m
+root@control-plane:/k8s-code# kubectl delete deploy my-nginx-deployment
+deployment.apps "my-nginx-deployment" deleted
+root@control-plane:/k8s-code# kubectl get hpa
+NAME            REFERENCE                        TARGETS              MINPODS   MAXPODS   REPLICAS   AGE
+my-hpa-devops   Deployment/my-nginx-deployment   cpu: <unknown>/25%   8         10        8          54m
+root@control-plane:/k8s-code# kubectl delete hpa my-hpa-devops
+horizontalpodautoscaler.autoscaling "my-hpa-devops" deleted
+root@control-plane:/k8s-code# kubectl apply -f deployment-hpa.yaml --namespace=dev-env
+horizontalpodautoscaler.autoscaling/my-hpa-devops created
+root@control-plane:/k8s-code# kubectl get pod
+No resources found in default namespace.
+root@control-plane:/k8s-code# kubectl get pod -n dev-env
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-2bsth   1/1     Running   0          25s
+my-nginx-deployment-96b9d695-6v985   1/1     Running   0          25s
+my-nginx-deployment-96b9d695-8hvh6   1/1     Running   0          25s
+my-nginx-deployment-96b9d695-94xmg   1/1     Running   0          25s
+my-nginx-deployment-96b9d695-kr5sq   1/1     Running   0          2m22s
+my-nginx-deployment-96b9d695-lzx4b   1/1     Running   0          25s
+my-nginx-deployment-96b9d695-rmlbm   1/1     Running   0          25s
+my-nginx-deployment-96b9d695-ts7ph   1/1     Running   0          25s
+root@control-plane:/k8s-code# kubectl config view --minify | grep namespace:default
+root@control-plane:/k8s-code# kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://172.31.12.128:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: DATA+OMITTED
+    client-key-data: DATA+OMITTED
+root@control-plane:/k8s-code# kubectl get pod
+No resources found in default namespace.
+root@control-plane:/k8s-code# kubectl config set-context --current --namespace=dev-env
+Context "kubernetes-admin@kubernetes" modified.
+root@control-plane:/k8s-code# kubectl config view
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: DATA+OMITTED
+    server: https://172.31.12.128:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    namespace: dev-env
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+kind: Config
+preferences: {}
+users:
+- name: kubernetes-admin
+  user:
+    client-certificate-data: DATA+OMITTED
+    client-key-data: DATA+OMITTED
+root@control-plane:/k8s-code# kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-96b9d695-2bsth   1/1     Running   0          2m19s
+my-nginx-deployment-96b9d695-6v985   1/1     Running   0          2m19s
+my-nginx-deployment-96b9d695-8hvh6   1/1     Running   0          2m19s
+my-nginx-deployment-96b9d695-94xmg   1/1     Running   0          2m19s
+my-nginx-deployment-96b9d695-kr5sq   1/1     Running   0          4m16s
+my-nginx-deployment-96b9d695-lzx4b   1/1     Running   0          2m19s
+my-nginx-deployment-96b9d695-rmlbm   1/1     Running   0          2m19s
+my-nginx-deployment-96b9d695-ts7ph   1/1     Running   0          2m19s
+root@control-plane:/k8s-code#
