@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+    
+    tools {
+        maven 'maven' 
+    }
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Rahulpr89/M2-Devops-Project.git'
+            }
+        }
+ 
+        stage('Build with Maven') {
+            steps {
+                sh 'mvn clean package -Dmaven.test.failure.ignore=true'
+            }
+        }
+        stage('Docker iamge build and push to ecr') {
+            steps{
+             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'awsconfig']]) {
+                    sh '''
+                    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 832721971180.dkr.ecr.us-east-1.amazonaws.com
+                    docker build -t my-ecr .
+                    docker tag my-ecr:latest 832721971180.dkr.ecr.us-east-1.amazonaws.com/my-ecr:latest
+                    docker push 832721971180.dkr.ecr.us-east-1.amazonaws.com/my-ecr:latest
+                    '''
+                }
+        }
+        }
+        stage('Deploy to EKS') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'awsconfig']]) {
+                    sh '''
+                        aws eks update-kubeconfig --region us-east-1 --name my-cluster
+                        kubectl delete -f deployment.yaml || true
+                        kubectl apply -f deployment.yaml
+                        kubectl apply -f service.yaml
+                        kubectl rollout status deployment/regapp-deployment
+                    '''
+                }
+            }
+        }
+    }
+ 
+    post {
+        success {
+            junit '**/target/surefire-reports/TEST-*.xml'
+            archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
+        }
+    }
+}

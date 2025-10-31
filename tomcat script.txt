@@ -1,0 +1,5 @@
+#!/bin/bash
+yum install java* -y
+yum install wget -y
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.111/bin/apache-tomcat-9.0.111.tar.gz
+tar -xvzf apache-tomcat-9.0.111.tar.gz

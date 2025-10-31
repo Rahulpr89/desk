@@ -1,0 +1,11 @@
+jenkins ALL=(ALL) PASSWD: /bin/mv, /usr/bin/install
+
+
+added this in vim /etc/sudoers
+
+and also give pass to  Jenkins user
+
+and added a deployment and service file in GitHub or can add this file in Jenkins server
+
+
+or we can install eksclt or kubectl directly in Jenkins server

@@ -1,0 +1,292 @@
+Prometheus yml file 
+
+
+
+
+# my global config
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "node-exporter"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ["localhost:9100"]
+  - job_name: "swiggy-clone"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ["54.175.216.28:3000"]
+  - job_name: "prometheus"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ["localhost:9090"]
+
+
+
+
+
+
+
+
+
+echo "deb https://packages.grafana.com/oss/deb stable main" | sudo tee /etc/apt/sources.list.d/grafana.list
+
+ 66  wget -q -O - https://packages.grafana.com/gpg.key | sudo apt-key add -
+   67  sudo apt-get update
+   68  sudo apt-get -y install grafana
+   69  sudo systemctl enable grafana-server
+   70  sudo systemctl start grafana-server
+   71  sudo systemctl status grafana-server
+
+
+
+
+
+
+main.tf to create swiggy instace (instance-terraform)
+
+
+
+
+resource "aws_security_group" "my-ec2" {
+  name        = "Jenkins-Security Group"
+  description = "Open 22,443,80,9000,3000"
+
+  # Define a single ingress rule to allow traffic on all specified ports
+  ingress = [
+    for port in [22, 80, 443, 9000, 3000] : {
+      description      = "TLS from VPC"
+      from_port        = port
+      to_port          = port
+      protocol         = "tcp"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      security_groups  = []
+      self             = false
+    }
+  ]
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "my-ec2"
+  }
+}
+
+
+resource "aws_instance" "web" {
+  ami                    = "ami-0bbdd8c17ed981ef9" # change your ami name
+  instance_type          = "c7i-flex.large"
+  key_name               = "my-kp"
+  vpc_security_group_ids = [aws_security_group.my-ec2.id]
+  user_data              = templatefile("./script.sh", {})
+
+  tags = {
+    Name = "swiggy-base-server"
+  }
+  root_block_device {
+    volume_size = 30
+  }
+}
+
+
+
+
+
+provider.tf    
+
+
+
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "us-east-1"
+}
+
+
+
+(eks-terraform)
+
+main.tf
+
+
+
+data "aws_iam_policy_document" "assume_role" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["eks.amazonaws.com"]
+    }
+
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+resource "aws_iam_role" "example" {
+  name               = "eks-cluster-cloud"
+  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+}
+
+resource "aws_iam_role_policy_attachment" "example-AmazonEKSClusterPolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+  role       = aws_iam_role.example.name
+}
+
+#get vpc data
+data "aws_vpc" "default" {
+  default = true
+}
+#get public subnets for cluster
+data "aws_subnets" "public" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+}
+#cluster provision
+resource "aws_eks_cluster" "example" {
+  name     = "EKS_CLOUD"
+  role_arn = aws_iam_role.example.arn
+
+  vpc_config {
+    subnet_ids = ["subnet-065994f9e32369b62", "subnet-03810b3f4bbec8bcf"]
+  }
+
+  # Ensure that IAM Role permissions are created before and deleted after EKS Cluster handling.
+  # Otherwise, EKS will not be able to properly delete EKS managed EC2 infrastructure such as Security Groups.
+  depends_on = [
+  aws_iam_role_policy_attachment.example-AmazonEKSClusterPolicy,
+  ]
+}
+
+resource "aws_iam_role" "example1" {
+  name = "eks-node-group-cloud"
+
+  assume_role_policy = jsonencode({
+    Statement = [{
+      Action = "sts:AssumeRole"
+      Effect = "Allow"
+      Principal = {
+        Service = "ec2.amazonaws.com"
+      }
+    }]
+    Version = "2012-10-17"
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "example-AmazonEKSWorkerNodePolicy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+  role       = aws_iam_role.example1.name
+}
+
+resource "aws_iam_role_policy_attachment" "example-AmazonEKS_CNI_Policy" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+  role       = aws_iam_role.example1.name
+}
+
+resource "aws_iam_role_policy_attachment" "example-AmazonEC2ContainerRegistryReadOnly" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.example1.name
+}
+
+#create node group
+resource "aws_eks_node_group" "example" {
+  cluster_name    = aws_eks_cluster.example.name
+  node_group_name = "Node-cloud"
+  node_role_arn   = aws_iam_role.example1.arn
+  subnet_ids      = data.aws_subnets.public.ids
+
+  scaling_config {
+    desired_size = 1
+    max_size     = 1
+    min_size     = 1
+  }
+  instance_types = ["c7i-flex.large"]
+
+  # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
+  # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
+  depends_on = [
+    aws_iam_role_policy_attachment.example-AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.example-AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.example-AmazonEC2ContainerRegistryReadOnly,
+  ]
+}
+
+
+
+
+backend.tf
+
+
+
+terraform {
+  backend "s3" {
+    bucket = "helloooooooooo12" # Replace with your actual S3 bucket name
+    key    = "EKS/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "us-east-1"
+}
+
+
+
+
+

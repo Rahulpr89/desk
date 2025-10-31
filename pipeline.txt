@@ -1,0 +1,154 @@
+1. pipeline
+
+The main block that wraps the entire pipeline.
+Everything happens inside this block.
+
+2. agent
+
+Tells Jenkins where to run the pipeline or a stage.
+Example: agent any means use any available Jenkins agent.
+
+3. stages
+
+A collection of steps grouped into logical phases.
+Example: Build, Test, Deploy.
+
+4. stage
+
+Represents a single phase of the pipeline.
+Each stage contains steps.
+
+5. steps
+
+The actual commands or actions to run inside a stage.
+Example: sh 'mvn clean package' runs a shell command.
+
+
+
+🛠️ Optional but Powerful Directives
+These give you more control and flexibility:
+
+1. environment
+
+Used to set environment variables.
+Can be defined globally or per stage.
+Example:
+
+environment {
+    JAVA_HOME = '/usr/lib/jvm/java-11'
+    DEPLOY_ENV = 'production'
+}
+
+
+2. input
+
+Pauses the pipeline and waits for manual approval.
+Useful before deploying to production.
+Example:
+
+input {
+    message "Do you want to deploy?"
+}
+
+3. options
+
+Sets pipeline-level or stage-level behaviors.
+Example:
+
+
+options {
+    timeout(time: 10, unit: 'MINUTES') // Stop if it runs too long
+    retry(2) // Retry stage 2 times if it fails
+}
+
+4. parallel
+
+Runs multiple stages at the same time.
+Speeds up testing or builds.
+Example:
+
+
+stage('Parallel Tests') {
+    parallel {
+        stage('Unit Tests') {
+            steps { sh './run-unit-tests.sh' }
+        }
+        stage('Integration Tests') {
+            steps { sh './run-integration-tests.sh' }
+        }
+    }
+}
+
+5. parameters
+
+Allows users to input values before the pipeline starts.
+Example:
+
+
+parameters {
+    string(name: 'BRANCH', defaultValue: 'main', description: 'Git branch to build')
+    booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run tests?')
+}
+
+6. post
+
+Defines actions to run after a stage or pipeline finishes.
+Useful for notifications or cleanup.
+Example:
+
+
+post {
+    success {
+        echo 'Build succeeded!'
+    }
+    failure {
+        echo 'Build failed!'
+    }
+    always {
+        echo 'Pipeline finished.'
+    }
+}
+
+7. script
+
+Lets you write Groovy code inside a declarative pipeline.
+Useful for dynamic logic.
+Example:
+
+
+script {
+    def files = findFiles(glob: '**/*.war')
+    echo "Found ${files.length} WAR files"
+}
+
+8. tools
+
+Specifies tools (like JDK, Maven) configured in Jenkins.
+Jenkins will install and use them.
+Example:
+
+
+tools {
+    jdk 'Java 11'
+    maven 'Maven 3.8.6'
+}
+
+9. triggers
+
+Defines automatic triggers for the pipeline.
+Example:
+
+
+triggers {
+    pollSCM('* * * * *') // Check for changes every minute
+}
+
+10. when
+
+Adds conditions to control whether a stage runs.
+Example:
+
+
+when {
+    branch 'main' // Only run this stage on the main branch
+}

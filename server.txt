@@ -1,0 +1,555 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\10844721\Downloads> ssh -i "devops.pem" ec2-user@ec2-18-213-4-8.compute-1.amazonaws.com
+The authenticity of host 'ec2-18-213-4-8.compute-1.amazonaws.com (18.213.4.8)' can't be established.
+ED25519 key fingerprint is SHA256:DYkSEK8q76Hxrw+ORL1Ta+FU2R8+jzL4d3XNYW0eOkQ.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-18-213-4-8.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-172-31-23-118 ~]$ sudo su -
+[root@ip-172-31-23-118 ~]# yum update -y
+Amazon Linux 2023 Kernel Livepatch repository                                                        210 kB/s |  23 kB     00:00
+Dependencies resolved.
+Nothing to do.
+Complete!
+[root@ip-172-31-23-118 ~]#  yum install git -y
+Last metadata expiration check: 0:03:38 ago on Wed Sep 24 06:20:11 2025.
+Dependencies resolved.
+=====================================================================================================================================
+ Package                          Architecture           Version                                   Repository                   Size
+=====================================================================================================================================
+Installing:
+ git                              x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                  53 k
+Installing dependencies:
+ git-core                         x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                 4.9 M
+ git-core-doc                     noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                 2.8 M
+ perl-Error                       noarch                 1:0.17029-5.amzn2023.0.2                  amazonlinux                  41 k
+ perl-File-Find                   noarch                 1.37-477.amzn2023.0.7                     amazonlinux                  25 k
+ perl-Git                         noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                  41 k
+ perl-TermReadKey                 x86_64                 2.38-9.amzn2023.0.2                       amazonlinux                  36 k
+ perl-lib                         x86_64                 0.65-477.amzn2023.0.7                     amazonlinux                  15 k
+
+Transaction Summary
+=====================================================================================================================================
+Install  8 Packages
+
+Total download size: 7.9 M
+Installed size: 41 M
+Downloading Packages:
+(1/8): git-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                          1.2 MB/s |  53 kB     00:00
+(2/8): git-core-doc-2.50.1-1.amzn2023.0.1.noarch.rpm                                                  35 MB/s | 2.8 MB     00:00
+(3/8): git-core-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                      45 MB/s | 4.9 MB     00:00
+(4/8): perl-Error-0.17029-5.amzn2023.0.2.noarch.rpm                                                  619 kB/s |  41 kB     00:00
+(5/8): perl-File-Find-1.37-477.amzn2023.0.7.noarch.rpm                                               804 kB/s |  25 kB     00:00
+(6/8): perl-lib-0.65-477.amzn2023.0.7.x86_64.rpm                                                     801 kB/s |  15 kB     00:00
+(7/8): perl-Git-2.50.1-1.amzn2023.0.1.noarch.rpm                                                     1.7 MB/s |  41 kB     00:00
+(8/8): perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64.rpm                                               1.5 MB/s |  36 kB     00:00
+-------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                 46 MB/s | 7.9 MB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                             1/1
+  Installing       : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       1/8
+  Installing       : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   2/8
+  Installing       : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       3/8
+  Installing       : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 4/8
+  Installing       : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Installing       : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  6/8
+  Installing       : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       7/8
+  Installing       : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Running scriptlet: git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Verifying        : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            1/8
+  Verifying        : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       2/8
+  Verifying        : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   3/8
+  Verifying        : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  4/8
+  Verifying        : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Verifying        : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       6/8
+  Verifying        : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 7/8
+  Verifying        : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       8/8
+
+Installed:
+  git-2.50.1-1.amzn2023.0.1.x86_64            git-core-2.50.1-1.amzn2023.0.1.x86_64       git-core-doc-2.50.1-1.amzn2023.0.1.noarch
+  perl-Error-1:0.17029-5.amzn2023.0.2.noarch  perl-File-Find-1.37-477.amzn2023.0.7.noarch perl-Git-2.50.1-1.amzn2023.0.1.noarch
+  perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64 perl-lib-0.65-477.amzn2023.0.7.x86_64
+
+Complete!
+[root@ip-172-31-23-118 ~]# mkdir /code
+[root@ip-172-31-23-118 ~]# cd /code
+[root@ip-172-31-23-118 code]# git init --bare
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /code/
+[root@ip-172-31-23-118 code]# ls
+HEAD  config  description  hooks  info  objects  refs
+[root@ip-172-31-23-118 code]# cd
+[root@ip-172-31-23-118 ~]# hostname set-hostname git-server.example.com
+Usage: hostname [-b] {hostname|-F file}         set host name (from file)
+       hostname [-a|-A|-d|-f|-i|-I|-s|-y]       display formatted name
+       hostname                                 display host name
+
+       {yp,nis,}domainname {nisdomain|-F file}  set NIS domain name (from file)
+       {yp,nis,}domainname                      display NIS domain name
+
+       dnsdomainname                            display dns domain name
+
+       hostname -V|--version|-h|--help          print info and exit
+
+Program name:
+       {yp,nis,}domainname=hostname -y
+       dnsdomainname=hostname -d
+
+Program options:
+    -a, --alias            alias names
+    -A, --all-fqdns        all long host names (FQDNs)
+    -b, --boot             set default hostname if none available
+    -d, --domain           DNS domain name
+    -f, --fqdn, --long     long host name (FQDN)
+    -F, --file             read host name or NIS domain name from given file
+    -i, --ip-address       addresses for the host name
+    -I, --all-ip-addresses all addresses for the host
+    -s, --short            short host name
+    -y, --yp, --nis        NIS/YP domain name
+
+Description:
+   This command can get or set the host name or the NIS domain name. You can
+   also get the DNS domain or the FQDN (fully qualified domain name).
+   Unless you are using bind or NIS for host lookups you can change the
+   FQDN (Fully Qualified Domain Name) and the DNS domain name (which is
+   part of the FQDN) in the /etc/hosts file.
+[root@ip-172-31-23-118 ~]# bash
+[root@ip-172-31-23-118 ~]# hostname
+ip-172-31-23-118.ec2.internal
+[root@ip-172-31-23-118 ~]#
+[root@ip-172-31-23-118 ~]# hostnamectl set-hostname git-server.example.com
+[root@ip-172-31-23-118 ~]# bash
+[root@git-server ~]# mkdir /code
+mkdir: cannot create directory ‘/code’: File exists
+[root@git-server ~]# cd /code/
+[root@git-server code]# git init --bare
+Reinitialized existing Git repository in /code/
+[root@git-server code]# cd
+[root@git-server ~]# ls
+[root@git-server ~]# ll
+total 0
+[root@git-server ~]# ls
+[root@git-server ~]# cd /code/
+[root@git-server code]# ls
+HEAD  config  description  hooks  info  objects  refs
+[root@git-server code]# cd
+[root@git-server ~]# hostname
+git-server.example.com
+[root@git-server ~]# vim /etc/hosts
+[root@git-server ~]# ip a s
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: ens5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 0a:ff:df:e4:7f:1f brd ff:ff:ff:ff:ff:ff
+    altname enp0s5
+    altname eni-070b3da4cfaa085e6
+    altname device-number-0.0
+    inet 172.31.23.118/20 metric 512 brd 172.31.31.255 scope global dynamic ens5
+       valid_lft 1874sec preferred_lft 1874sec
+    inet6 fe80::8ff:dfff:fee4:7f1f/64 scope link proto kernel_ll
+       valid_lft forever preferred_lft forever
+[root@git-server ~]# vim /etc/hosts
+[root@git-server ~]# vim /etc/hosts
+[root@git-server ~]# vim /etc/hosts
+"/etc/hosts" 6L, 230B written
+[root@git-server ~]# vim /etc/hosts
+"/etc/hosts" 6L, 230B written
+[root@git-server ~]# ping dev-one.example.com
+PING dev-one.example.com (172.31.26.58) 56(84) bytes of data.
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=1 ttl=127 time=0.940 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=2 ttl=127 time=0.288 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=3 ttl=127 time=0.311 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=4 ttl=127 time=0.328 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=5 ttl=127 time=0.296 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=6 ttl=127 time=0.307 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=7 ttl=127 time=0.294 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=8 ttl=127 time=0.332 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=9 ttl=127 time=0.301 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=10 ttl=127 time=0.297 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=11 ttl=127 time=0.306 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=12 ttl=127 time=0.287 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=13 ttl=127 time=0.299 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=14 ttl=127 time=0.291 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=15 ttl=127 time=0.288 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=16 ttl=127 time=0.296 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=17 ttl=127 time=0.308 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=18 ttl=127 time=0.279 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=19 ttl=127 time=0.300 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=20 ttl=127 time=0.309 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=21 ttl=127 time=0.298 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=22 ttl=127 time=0.289 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=23 ttl=127 time=0.290 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=24 ttl=127 time=0.318 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=25 ttl=127 time=0.318 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=26 ttl=127 time=0.312 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=27 ttl=127 time=0.292 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=28 ttl=127 time=0.303 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=29 ttl=127 time=0.290 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=30 ttl=127 time=0.284 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=31 ttl=127 time=0.287 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=32 ttl=127 time=0.282 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=33 ttl=127 time=0.308 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=34 ttl=127 time=0.296 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=35 ttl=127 time=0.335 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=36 ttl=127 time=0.295 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=37 ttl=127 time=0.289 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=38 ttl=127 time=0.324 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=39 ttl=127 time=0.297 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=40 ttl=127 time=0.290 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=41 ttl=127 time=0.302 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=42 ttl=127 time=0.299 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=43 ttl=127 time=0.285 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=44 ttl=127 time=0.305 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=45 ttl=127 time=0.290 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=46 ttl=127 time=0.300 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=47 ttl=127 time=0.291 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=48 ttl=127 time=0.286 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=49 ttl=127 time=0.322 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=50 ttl=127 time=0.298 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=51 ttl=127 time=0.308 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=52 ttl=127 time=0.307 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=53 ttl=127 time=0.292 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=54 ttl=127 time=0.287 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=55 ttl=127 time=0.356 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=56 ttl=127 time=0.320 ms
+^C
+--- dev-one.example.com ping statistics ---
+56 packets transmitted, 56 received, 0% packet loss, time 57151ms
+rtt min/avg/max/mdev = 0.279/0.312/0.940/0.085 ms
+[root@git-server ~]# cd .ssh/
+[root@git-server .ssh]# Connection to ec2-18-213-4-8.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-18-213-4-8.compute-1.amazonaws.com closed.
+PS C:\Users\10844721\Downloads> ssh -i "devops.pem" ec2-user@ec2-54-196-146-255.compute-1.amazonaws.com
+The authenticity of host 'ec2-54-196-146-255.compute-1.amazonaws.com (54.196.146.255)' can't be established.
+ED25519 key fingerprint is SHA256:DYkSEK8q76Hxrw+ORL1Ta+FU2R8+jzL4d3XNYW0eOkQ.
+This host key is known by the following other names/addresses:
+    C:\Users\10844721/.ssh/known_hosts:11: ec2-18-213-4-8.compute-1.amazonaws.com
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-54-196-146-255.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Sep 24 06:17:14 2025 from 103.244.155.144
+[ec2-user@git-server ~]$ sudo su -
+Last login: Wed Sep 24 06:19:05 UTC 2025 on pts/1
+[root@git-server ~]# cd .ssh/
+[root@git-server .ssh]# ll
+total 4
+-rw-------. 1 root root 554 Sep 24 06:15 authorized_keys
+[root@git-server .ssh]# cd
+[root@git-server ~]# vim /authorized_core
+[root@git-server ~]# hostname
+git-server.example.com
+[root@git-server ~]# client_loop: send disconnect: Connection reset
+PS C:\Users\10844721\Downloads> ssh -i "devops.pem" ec2-user@ec2-54-236-250-212.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Sep 24 08:38:36 2025 from 103.244.155.144
+[ec2-user@dev-two ~]$ exit
+logout
+Connection to ec2-54-236-250-212.compute-1.amazonaws.com closed.
+PS C:\Users\10844721\Downloads> ssh -i "devops.pem" ec2-user@ec2-54-196-146-255.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Sep 24 08:38:26 2025 from 103.244.155.144
+[ec2-user@git-server ~]$ sudo su -
+Last login: Wed Sep 24 08:40:53 UTC 2025 on pts/1
+[root@git-server ~]# ls
+[root@git-server ~]# hostname
+git-server.example.com
+[root@git-server ~]# cd .ssh/
+[root@git-server .ssh]# ll
+total 4
+-rw-------. 1 root root 554 Sep 24 06:15 authorized_keys
+[root@git-server .ssh]# l.
+ls: cannot access '.*': No such file or directory
+[root@git-server .ssh]# cd .ssh/
+-bash: cd: .ssh/: No such file or directory
+[root@git-server .ssh]# ll
+total 4
+-rw-------. 1 root root 554 Sep 24 06:15 authorized_keys
+[root@git-server .ssh]# l.
+ls: cannot access '.*': No such file or directory
+[root@git-server .ssh]# vim authorised_key
+"authorised_key" [New] 3L, 1167B written
+[root@git-server .ssh]# hostname
+git-server.example.com
+[root@git-server .ssh]#
+[root@git-server .ssh]# ll
+total 8
+-rw-r--r--. 1 root root 1167 Sep 24 09:22 authorised_key
+-rw-------. 1 root root  554 Sep 24 06:15 authorized_keys
+[root@git-server .ssh]# rm -rf authorised_key
+[root@git-server .ssh]# ll
+total 4
+-rw-------. 1 root root 554 Sep 24 06:15 authorized_keys
+[root@git-server .ssh]# cat authorized_keys
+no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"ec2-user\" rather than the user \"root\".';echo;sleep 10;exit 142" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF209aqHC//6MVwZfrHRgbynchg1pYpgmm+79P+z5wnTcVmu+qA2qswm5fwkie+Od21JG3UMmNP4qlfF5PQFcRnlrs7nohfVJRkXqvfExaecIuWmngmMtJ6l1pwP43PT+2JA5B8sIzwgCWcCtLzYgNOR1tsrgcltpUVfl2BRjgCYOcp7gQ06K7uPlFdAUx2v3fXxNjY0MfoL2GROrlcmHbHewDhbGxlQHxF3y/tVNDQZFJlJhD1qbZPPWfdKf21K28vkLug4x9sC6kiwIz8GTVA4Kg22rE4TmnIHNxnhRlu8uSd9owUWANMmfrn1kU1q9dFsZtnp8xCsplBTM1WzIF devops
+[root@git-server .ssh]# vim authorized_keys
+[root@git-server .ssh]# ^CB written
+[root@git-server .ssh]# ^C
+[root@git-server .ssh]# cd
+[root@git-server ~]# hostname
+git-server.example.com
+[root@git-server ~]# hostname
+git-server.example.com
+[root@git-server ~]# cd /.ssh
+-bash: cd: /.ssh: No such file or directory
+[root@git-server ~]# cd .ssh
+[root@git-server .ssh]# ll
+total 4
+-rw-------. 1 root root 1720 Sep 24 09:33 authorized_keys
+[root@git-server .ssh]# vim authorized_keys
+[root@git-server .ssh]# hostname
+git-server.example.com
+[root@git-server .ssh]# vim authorized_keys
+"authorized_keys" 2L, 1709B written
+[root@git-server .ssh]# ll
+total 4
+-rw-------. 1 root root 1709 Sep 24 09:48 authorized_keys
+[root@git-server .ssh]# vim authorized_keys
+"authorized_keys" 3L, 1710B written
+[root@git-server .ssh]# vim authorized_keys
+[root@git-server .ssh]# vim authorized_keys
+[root@git-server .ssh]# cd
+[root@git-server ~]# cat authorized_keys
+cat: authorized_keys: No such file or directory
+[root@git-server ~]# cat .ssh/authorized_keys
+no-port-forwarding,no-agent-forwarding,no-X11-forwarding,command="echo 'Please login as the user \"ec2-user\" rather than the user \"root\".';echo;sleep 10;exit 142" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF209aqHC//6MVwZfrHRgbynchg1pYpgmm+79P+z5wnTcVmu+qA2qswm5fwkie+Od21JG3UMmNP4qlfF5PQFcRnlrs7nohfVJRkXqvfExaecIuWmngmMtJ6l1pwP43PT+2JA5B8sIzwgCWcCtLzYgNOR1tsrgcltpUVfl2BRjgCYOcp7gQ06K7uPlFdAUx2v3fXxNjY0MfoL2GROrlcmHbHewDhbGxlQHxF3y/tVNDQZFJlJhD1qbZPPWfdKf21K28vkLug4x9sC6kiwIz8GTVA4Kg22rE4TmnIHNxnhRlu8uSd9owUWANMmfrn1kU1q9dFsZtnp8xCsplBTM1WzIF devops
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDj5Ry/dWA4cpyGN4P1uZyy4k8fPlH7AmGcNgCUSNW4T6Thq5h/XdeIjOAm1drA4J1nVrLwjfIprQtagpEVUkMtazJNUPSc1sQc5y1DAuz58leiB7Jqdo61DnJFjJJQwJlP73JzR8FxRBrIWuii4cTeQhVDkah7nBCPvEzOquNqZQEeJ9Tm8EPV1MpxcU12Yk1VNEzPFHKsWY5TILEIsD0S5v8th6/ilaY3UjsPhXmBBnHMV1MAwKJjAw5qQncvmaDMRJnkwcXWpDrqZQJOVt4FsoCh/Cvv3GIN/3yiZ2O1uyx2J4qjWzlPyuGv36Oe7Gd0pGkCy5w9J81XiTTSFX5oT9H2TgZXBgXzs4oMBtk5qzGc0L2qFrsRjWU8j/9H4+xunKiio5p2DO3tEYm6qmE7ffzt7bZoNxveJ9piipPs6066DcosZyjIpxm1NzOGTGPLE5UIw1bSj8VSxOKVmYMgQnR6Em+mNfOUCgDH5f25YLlbVL+Q/H7GHjqHuvA2Ckc= root@dev-one.example.com
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCsLn+pXf+jXETjxwrjoYOu9Y4DvzcMjy2iQCtpXSRZK3o/w2vl9BtZHiIo80IuCe1uJvea1lz6xZCGf2rwcKvaYzsNFFI4XHvziLc4icYUQo2ie5e112CcDf+GMzPyMWQYZpK5Mjkl1jPXph/3EZcBkdGMUlUHs8fXhLU1PSqxg3fR4ys4DQtZkSkrqmZqJ51fhTE5aPzSeNTJSfzI11IwxPENIN3mIwjOebzRZYdERO486ZBi5WVrQq7R58lU8vn1VCV2XZ6y5GVIjPkPUf/blb/fvZ8LqnlEgfnnnWSWvepxCJsTRq5Txhf4P9DvJj/CCTRpm2VmO5WGH9bTwl+LimcVyLJhrWU+HcOif4eYxno2uMBs9t3C2JPxhUhi33eGYuXcGdk399W92FwUKs0SsImDFuhC1z62vvMRBQ10goQ9U1LWpQM5oeHbtXLrN7kKt0BlCPBhOUy1Jkcx//65+eWoiU3oZawzk6c5GKtyIljkEoGFOSR1EFwlMAeeZu8= root@dev-two.example.com
+
+[root@git-server ~]# vim /etc/hosts
+[root@git-server ~]# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost6 localhost6.localdomain6
+
+172.31.23.118 git-server.example.com
+172.31.29,118 dev-one.example.com
+172.31.26.58 dev-two.example.com
+[root@git-server ~]# vim /etc/hosts
+[root@git-server ~]# client_loop: send disconnect: Connection reset
+PS C:\Users\10844721\Downloads> ssh -i "devops.pem" ec2-user@ec2-54-196-146-255.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Sep 24 09:12:21 2025 from 103.244.155.144
+[ec2-user@git-server ~]$ sudo su -
+Last login: Wed Sep 24 10:09:14 UTC 2025 from 172.31.26.58 on pts/3
+[root@git-server ~]# ll
+total 0
+[root@git-server ~]# ls
+[root@git-server ~]# cd
+[root@git-server ~]# ls
+[root@git-server ~]# mkdie /code
+-bash: mkdie: command not found
+[root@git-server ~]# mkdir /code
+mkdir: cannot create directory ‘/code’: File exists
+[root@git-server ~]# whereis /code
+code:
+[root@git-server ~]# ll
+total 0
+[root@git-server ~]# ls
+[root@git-server ~]# l.
+.bash_history  .bash_logout  .bash_profile  .bashrc  .cshrc  .ssh  .tcshrc  .viminfo
+[root@git-server ~]# ll
+total 0
+[root@git-server ~]# mkdir code
+[root@git-server ~]# ll
+total 0
+drwxr-xr-x. 2 root root 6 Sep 24 10:39 code
+[root@git-server ~]# rm -rf code
+[root@git-server ~]# ll
+total 0
+[root@git-server ~]# cd /
+[root@git-server /]# ll
+total 36
+-rw-r--r--.   1 root root   592 Sep 24 08:46 authorized_core
+lrwxrwxrwx.   1 root root     7 Jan 30  2023 bin -> usr/bin
+dr-xr-xr-x.   5 root root 16384 Sep 10 06:46 boot
+drwxr-xr-x.   6 root root   103 Sep 24 06:36 code
+drwxr-xr-x.  14 root root  3060 Sep 24 08:37 dev
+drwxr-xr-x.  76 root root 16384 Sep 24 10:08 etc
+drwxr-xr-x.   3 root root    22 Sep 24 06:15 home
+lrwxrwxrwx.   1 root root     7 Jan 30  2023 lib -> usr/lib
+lrwxrwxrwx.   1 root root     9 Jan 30  2023 lib64 -> usr/lib64
+drwxr-xr-x.   2 root root     6 Sep 10 06:43 local
+drwxr-xr-x.   2 root root     6 Jan 30  2023 media
+drwxr-xr-x.   2 root root     6 Jan 30  2023 mnt
+drwxr-xr-x.   3 root root    17 Sep 10 06:46 opt
+dr-xr-xr-x. 168 root root     0 Sep 24 08:37 proc
+dr-xr-x---.   3 root root   140 Sep 24 10:39 root
+drwxr-xr-x.  28 root root   820 Sep 24 08:37 run
+lrwxrwxrwx.   1 root root     8 Jan 30  2023 sbin -> usr/sbin
+drwxr-xr-x.   2 root root     6 Jan 30  2023 srv
+dr-xr-xr-x.  13 root root     0 Sep 24 08:37 sys
+drwxrwxrwt.  11 root root   220 Sep 24 10:38 tmp
+drwxr-xr-x.  12 root root   144 Sep 10 06:44 usr
+drwxr-xr-x.  19 root root   266 Sep 24 06:15 var
+[root@git-server /]# cd code
+[root@git-server code]# ll
+total 28
+-rw-r--r--. 1 root root    23 Sep 24 06:24 HEAD
+-rw-r--r--. 1 root root    66 Sep 24 06:36 config
+-rw-r--r--. 1 root root    73 Sep 24 06:24 description
+drwxr-xr-x. 2 root root 16384 Sep 24 06:24 hooks
+drwxr-xr-x. 2 root root    21 Sep 24 06:24 info
+drwxr-xr-x. 4 root root    30 Sep 24 06:24 objects
+drwxr-xr-x. 4 root root    31 Sep 24 06:24 refs
+[root@git-server code]# ls
+HEAD  config  description  hooks  info  objects  refs
+[root@git-server code]# git status
+fatal: this operation must be run in a work tree
+[root@git-server code]# git init --bare
+Reinitialized existing Git repository in /code/
+[root@git-server code]# cd /code/
+[root@git-server code]# git status
+fatal: this operation must be run in a work tree
+[root@git-server code]# git status
+fatal: this operation must be run in a work tree
+[root@git-server code]# ls
+HEAD  config  description  hooks  info  objects  refs
+[root@git-server code]# ls
+HEAD  config  description  hooks  info  objects  refs
+[root@git-server code]# cd
+[root@git-server ~]# ls
+[root@git-server ~]# cd /code/
+[root@git-server code]# code
+-bash: code: command not found
+[root@git-server code]# git status
+fatal: this operation must be run in a work tree
+[root@git-server code]# git
+usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--no-lazy-fetch]
+           [--no-optional-locks] [--no-advice] [--bare] [--git-dir=<path>]
+           [--work-tree=<path>] [--namespace=<name>] [--config-env=<name>=<envvar>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   restore    Restore working tree files
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   diff       Show changes between commits, commit and working tree, etc
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   backfill   Download missing objects in a partial clone
+   branch     List, create, or delete branches
+   commit     Record changes to the repository
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   reset      Reset current HEAD to the specified state
+   switch     Switch branches
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+[root@git-server code]# l.
+ls: cannot access '.*': No such file or directory
+[root@git-server code]# l.
+ls: cannot access '.*': No such file or directory
+[root@git-server code]# git log
+commit b6cd2e64890b91268d414f1d0e4a5f158c9535a4 (HEAD -> master)
+Author: root <root@dev-one.example.com>
+Date:   Wed Sep 24 10:50:26 2025 +0000
+
+    first-commit
+[root@git-server code]# git log
+commit 9c528ae1e2c246e0a0b041f08f918c639686ab4f (HEAD -> master)
+Author: root <root@dev-one.example.com>
+Date:   Wed Sep 24 11:03:58 2025 +0000
+
+    second-commit
+
+commit b6cd2e64890b91268d414f1d0e4a5f158c9535a4
+Author: root <root@dev-one.example.com>
+Date:   Wed Sep 24 10:50:26 2025 +0000
+
+    first-commit
+[root@git-server code]# Connection to ec2-54-196-146-255.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-54-196-146-255.compute-1.amazonaws.com closed.
+PS C:\Users\10844721\Downloads>

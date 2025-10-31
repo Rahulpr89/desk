@@ -1,0 +1,154 @@
+Dockerfile 
+
+
+
+
+FROM nginx:alpine
+COPY index.html /usr/share/nginx/html/index.html
+
+
+
+main.yml
+
+
+
+name: Upload Website
+ 
+on:
+  push:
+    branches:
+    - main
+ 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+ 
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+ 
+    - name: Deploy static site to S3 bucket
+      run: aws s3 sync ./ s3://devops-day-25 --delete
+
+
+
+
+deploy.yml
+
+
+
+name: Deploy Static Site to ECS
+ 
+on:
+
+  push:
+
+    branches:
+
+      - main
+ 
+jobs:
+
+  deploy:
+
+    runs-on: ubuntu-latest
+ 
+    steps:
+
+    - name: Checkout code
+
+      uses: actions/checkout@v3
+ 
+    - name: Configure AWS credentials
+
+      uses: aws-actions/configure-aws-credentials@v2
+
+      with:
+
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+        aws-region: us-east-1
+ 
+    - name: Login to Amazon ECR
+
+      run: aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 832721971180.dkr.ecr.us-east-1.amazonaws.com
+ 
+    - name: Build Docker image
+
+      run: docker build -t my-web-ecr .
+ 
+    - name: Tag Docker image
+
+      run: docker tag my-web-ecr:latest 832721971180.dkr.ecr.us-east-1.amazonaws.com/my-web-ecr:latest
+ 
+    - name: Push Docker image to ECR
+
+      run: docker push 832721971180.dkr.ecr.us-east-1.amazonaws.com/my-web-ecr:latest
+ 
+    - name: Register new task definition
+
+      run: |
+
+        aws ecs register-task-definition \
+
+          --cli-input-json file://ecs-task-def.json
+ 
+    - name: Update ECS service with new task definition
+
+      run: |
+
+        aws ecs update-service \
+
+          --cluster devops-cluster \
+
+          --service my-app-tast-service-zxjou1x0 \
+
+          --task-definition my-app-tast
+ 
+
+
+
+json file that i used it will be changed 
+
+
+
+{
+  "family": "my-app-tast",
+  "executionRoleArn": "arn:aws:iam::832721971180:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::832721971180:role/my-ecs-role",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "3072",
+  "containerDefinitions": [
+    {
+      "name": "my-container",
+      "image": "832721971180.dkr.ecr.us-east-1.amazonaws.com/my-web-ecr:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/my-app-tast",
+          "awslogs-create-group": "true",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
