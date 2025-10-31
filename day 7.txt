@@ -1,0 +1,29 @@
+ lsblk
+    2  blkid
+    3  mkfs.ext4/dev/nvme1n1
+    4  mkdir /data
+    5  mount /dev/nvme1n1 /data/
+    6  mount /dev/nvme1n1 /data
+    7  cd /data/
+    8  touch devops{1..100}.txt
+    9  ll
+   10  df -h
+   11  mount /dev/nvme1n1 /data/
+   12  blkid
+   13  cd /data/
+   14  ll
+   15  blkid
+   16  ll
+   17  cd
+   18  df -h
+   19  lsblk
+   20  cd /data/
+   21  ll
+   22  cd
+   23  lsblk
+   24  blkid
+   25  history
+   26  mkfs.ext4 /dev/nvme1n1
+   27  mkdir /sanjaya
+   28  mount /dev/nvme1n1 /sanjaya/
+   29  df -h

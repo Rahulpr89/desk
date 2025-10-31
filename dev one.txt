@@ -1,0 +1,840 @@
+[root@ip-172-31-26-58 ~]# hostnamectl set-hostname client1.example.com
+[root@ip-172-31-26-58 ~]# bash
+[root@client1 ~]# mkdir /dev-one
+mkdir: cannot create directory ‘/dev-one’: File exists
+[root@client1 ~]# cd /dev-one/
+[root@client1 dev-one]# git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /dev-one/.git/
+[root@client1 dev-one]# ls
+[root@client1 dev-one]# git init
+Reinitialized existing Git repository in /dev-one/.git/
+[root@client1 dev-one]# ls
+[root@client1 dev-one]# ls
+[root@client1 dev-one]# cd /code
+bash: cd: /code: No such file or directory
+[root@client1 dev-one]# cd /code/
+bash: cd: /code/: No such file or directory
+[root@client1 dev-one]# hostname
+client2.example.com
+[root@client1 dev-one]# ip a s
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: ens5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 0a:ff:d8:f7:a0:fb brd ff:ff:ff:ff:ff:ff
+    altname enp0s5
+    altname eni-020495b3e7a03ed7c
+    altname device-number-0.0
+    inet 172.31.26.58/20 metric 512 brd 172.31.31.255 scope global dynamic ens5
+       valid_lft 1817sec preferred_lft 1817sec
+    inet6 fe80::8ff:d8ff:fef7:a0fb/64 scope link proto kernel_ll
+       valid_lft forever preferred_lft forever
+[root@client1 dev-one]# hostname
+client2.example.com
+[root@client1 dev-one]# hostnamectl set-hostname git-server.example.com
+[root@client1 dev-one]# bash
+[root@git-server dev-one]# hostnamectl set-hostname dev-one.example.com
+[root@git-server dev-one]# bash
+[root@dev-one dev-one]# vim /etc/hosts
+[root@dev-one dev-one]# cat /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost6 localhost6.localdomain6
+
+
+172.31.23.118 git-server.example.com
+172.31.26.58 dev-one.example.com
+172.31.26.58 dev-two.example.com
+[root@dev-one dev-one]# ping dev-two.example.com
+PING dev-two.example.com (172.31.26.58) 56(84) bytes of data.
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=1 ttl=127 time=0.021 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=2 ttl=127 time=0.031 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=3 ttl=127 time=0.031 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=4 ttl=127 time=0.031 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=5 ttl=127 time=0.039 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=6 ttl=127 time=0.030 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=7 ttl=127 time=0.032 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=8 ttl=127 time=0.030 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=9 ttl=127 time=0.030 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=10 ttl=127 time=0.030 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=11 ttl=127 time=0.031 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=12 ttl=127 time=0.029 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=13 ttl=127 time=0.032 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=14 ttl=127 time=0.029 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=15 ttl=127 time=0.030 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=16 ttl=127 time=0.030 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=17 ttl=127 time=0.031 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=18 ttl=127 time=0.029 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=19 ttl=127 time=0.031 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=20 ttl=127 time=0.031 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=21 ttl=127 time=0.029 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=22 ttl=127 time=0.025 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=23 ttl=127 time=0.037 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=24 ttl=127 time=0.029 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=25 ttl=127 time=0.031 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=26 ttl=127 time=0.030 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=27 ttl=127 time=0.032 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=28 ttl=127 time=0.032 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=29 ttl=127 time=0.032 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=30 ttl=127 time=0.031 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=31 ttl=127 time=0.029 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=32 ttl=127 time=0.041 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=33 ttl=127 time=0.029 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=34 ttl=127 time=0.088 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=35 ttl=127 time=0.029 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=36 ttl=127 time=0.040 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=37 ttl=127 time=0.116 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=38 ttl=127 time=0.032 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=39 ttl=127 time=0.039 ms
+64 bytes from dev-one.example.com (172.31.26.58): icmp_seq=40 ttl=127 time=0.032 ms
+^C
+--- dev-two.example.com ping statistics ---
+40 packets transmitted, 40 received, 0% packet loss, time 40548ms
+rtt min/avg/max/mdev = 0.021/0.034/0.116/0.016 ms
+[root@dev-one dev-one]# cd /dev-one/
+[root@dev-one dev-one]# ll
+total 0
+[root@dev-one dev-one]# ls
+[root@dev-one dev-one]# l.
+.git
+[root@dev-one dev-one]# vim index.html
+[root@dev-one dev-one]# cat index.html
+Hello all Greetings of the day
+################################
+We are learning devops tool git/github
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+[root@dev-one dev-one]# git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+[root@dev-one dev-one]# git add index.html
+[root@dev-one dev-one]# git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   index.html
+
+[root@dev-one dev-one]# git commit -m first-commit
+[master (root-commit) 668ab12] first-commit
+ Committer: root <root@dev-two.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 5 insertions(+)
+ create mode 100644 index.html
+[root@dev-one dev-one]# git log
+commit 668ab12b2eb623bbd22bc8112c298872608f1170 (HEAD -> master)
+Author: root <root@dev-two.example.com>
+Date:   Wed Sep 24 07:13:40 2025 +0000
+
+    first-commit
+[root@dev-one dev-one]# vim index.html
+[root@dev-one dev-one]# git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[root@dev-one dev-one]# git add .
+[root@dev-one dev-one]# git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   index.html
+
+[root@dev-one dev-one]# git log
+commit 668ab12b2eb623bbd22bc8112c298872608f1170 (HEAD -> master)
+Author: root <root@dev-two.example.com>
+Date:   Wed Sep 24 07:13:40 2025 +0000
+
+    first-commit
+[root@dev-one dev-one]#
+[root@dev-one dev-one]# git remote -v
+[root@dev-one dev-one]#
+[root@dev-one dev-one]# ll
+total 4
+-rw-r--r--. 1 root root 159 Sep 24 07:14 index.html
+[root@dev-one dev-one]# cd .ssh/
+bash: cd: .ssh/: No such file or directory
+[root@dev-one dev-one]# ll
+total 4
+-rw-r--r--. 1 root root 159 Sep 24 07:14 index.html
+[root@dev-one dev-one]# cd
+[root@dev-one ~]# ssh-keyget
+bash: ssh-keyget: command not found
+[root@dev-one ~]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): Connection to ec2-23-22-149-179.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-23-22-149-179.compute-1.amazonaws.com closed.
+PS C:\Users\10844721\downloads>
+PS C:\Users\10844721\downloads> ssh -i "devops.pem" ec2-user@ec2-18-212-94-56.compute-1.amazonaws.com
+The authenticity of host 'ec2-18-212-94-56.compute-1.amazonaws.com (18.212.94.56)' can't be established.
+ED25519 key fingerprint is SHA256:DU3Am87xOF8jqvlr9DQ7RXsTW/t8pygJGvx4BtmyRVw.
+This host key is known by the following other names/addresses:
+    C:\Users\10844721/.ssh/known_hosts:13: ec2-18-234-209-95.compute-1.amazonaws.com
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-18-212-94-56.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Sep 24 06:17:53 2025 from 103.244.155.144
+[ec2-user@ip-172-31-29-118 ~]$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/ec2-user/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/ec2-user/.ssh/id_rsa
+Your public key has been saved in /home/ec2-user/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:UWPkCo5B/NJZ+DiWEzpyw4VxYaHk+BeZvaYHzV3Iwic ec2-user@ip-172-31-29-118.ec2.internal
+The key's randomart image is:
++---[RSA 3072]----+
+|   .+o=+ .=      |
+|   =o++=.= o     |
+|  ..+==BE = .    |
+|  ..B+X=.O .     |
+|   oo=+oS .      |
+|     . +         |
+|      . .        |
+|       .         |
+|                 |
++----[SHA256]-----+
+[ec2-user@ip-172-31-29-118 ~]$ ll
+total 0
+[ec2-user@ip-172-31-29-118 ~]$ ls
+[ec2-user@ip-172-31-29-118 ~]$ l.
+.bash_history  .bash_logout  .bash_profile  .bashrc  .ssh
+[ec2-user@ip-172-31-29-118 ~]$ cd .ssh/
+[ec2-user@ip-172-31-29-118 .ssh]$ ll
+total 12
+-rw-------. 1 ec2-user ec2-user  388 Sep 24 06:15 authorized_keys
+-rw-------. 1 ec2-user ec2-user 2635 Sep 24 08:43 id_rsa
+-rw-r--r--. 1 ec2-user ec2-user  592 Sep 24 08:43 id_rsa.pub
+[ec2-user@ip-172-31-29-118 .ssh]$ cat .ssh
+cat: .ssh: No such file or directory
+[ec2-user@ip-172-31-29-118 .ssh]$ cat /id_rsa.pub
+cat: /id_rsa.pub: No such file or directory
+[ec2-user@ip-172-31-29-118 .ssh]$ cat id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDBaBKEkm1MjlD5ysTmNFBCGJ7zBMl3rbf3cf75PJgg6vQYJPm9pKF0feTkRQjUfYypDkG4XpGoqgB6sC4rfN4VPCFsocCVSowUfXYDKGHvtPU0zIb84UN1mhYwtimYbObBhbfa9fDVp3v949bnVGB9njkl5iCHa6vOZsk+YXQkQjra1OHK5RohJkSP28ikAyZOscKYCMO2wQt/EZA25V0b5ftZUlQCmByeiBViy/SQibGW8DpsmLNjOSxCvKYcX9AKmP6b6PJ+Qb0NK3mKc6AmTKUyf+lovcx+uFVGn3QnNd5LpIZFykzFhBMjhydg1QOqmkLkanzbXWi7dzUOK8zA/9i8rI/Ve5+FcC1LpJnXv5LYgn+NRKFwhY8Jx5EV1wnio8a62zF2VUZzuM/QbCpsEedZ6K/6SMG63QofI6o/pEiT6Qd40V6oHfyxhSAMZBWutt9Q+YYhGLTqOrAviulIzjxzdmf8FyRqYclKJ9//b05lEDBYcj7Jk+UzY+o/348= ec2-user@ip-172-31-29-118.ec2.internal
+[ec2-user@ip-172-31-29-118 .ssh]$ cd
+[ec2-user@ip-172-31-29-118 ~]$ ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[ec2-user@ip-172-31-29-118 ~]$ client_loop: send disconnect: Connection reset
+PS C:\Users\10844721\downloads> ssh -i "devops.pem" ec2-user@ec2-18-212-94-56.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Sep 24 08:38:22 2025 from 103.244.155.144
+[ec2-user@ip-172-31-29-118 ~]$ hostname
+ip-172-31-29-118.ec2.internal
+[ec2-user@ip-172-31-29-118 ~]$ sudo su -
+Last login: Wed Sep 24 06:19:12 UTC 2025 on pts/1
+[root@ip-172-31-29-118 ~]# hostname
+ip-172-31-29-118.ec2.internal
+[root@ip-172-31-29-118 ~]# exit
+logout
+[ec2-user@ip-172-31-29-118 ~]$ exit
+logout
+Connection to ec2-18-212-94-56.compute-1.amazonaws.com closed.
+PS C:\Users\10844721\downloads> ssh -i "devops.pem" ec2-user@ec2-18-212-94-56.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Sep 24 09:10:15 2025 from 103.244.155.144
+[ec2-user@ip-172-31-29-118 ~]$ sudo su -
+Last login: Wed Sep 24 09:11:01 UTC 2025 on pts/1
+[root@ip-172-31-29-118 ~]# l.
+.bash_history  .bash_logout  .bash_profile  .bashrc  .cshrc  .ssh  .tcshrc
+[root@ip-172-31-29-118 ~]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:uC1zPBf+gK8i6HRX3x5dt6yNZhhzml10NiJ7zOX2TJI root@ip-172-31-29-118.ec2.internal
+The key's randomart image is:
++---[RSA 3072]----+
+|                 |
+|                 |
+|                 |
+|       .   . . +o|
+|      . S . = =o=|
+|       = + * *E=+|
+|  ... = * = % +*.|
+| ......+ + B =+ o|
+| ..  . .... =o . |
++----[SHA256]-----+
+[root@ip-172-31-29-118 ~]# cat .ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDVpzRbDTcUdnYIGfBktyoOT2Dz+IH5Fze8JnUC6h2fQ3+OU25HpbLnh4HVtPGkvVi7XdXlO8BXegB0p88WIsEjTMssSPZX45bFut/cLNjQVucDhtMU+VGcvAzbFsQXP88t6GbsjkFQ+6CgMOSb2q59XVv7n/bdrXqCpEcpR9FC+hsawz+XMOPbzm7dsyC037AvtPOwK2ilFITCYblyipwNFitDQiViLU4sCh+UYJUHcp6hRPd79ShyOaYN4khXXIIZkcoRT7JECMqE3TICb3oNeZH6kpKPidykvKAbHZedr3fFHobewatlb+vqXudT46SuBV2kpmMs2lumWN2CQGEO1V5lNxL+2Gni1SzjTOrV/r3cZxEKTDygr52BBeMQHkuVtTH8d4/HY4SDaFvJtHTNRXstBupKj5S/Scasu1Xsfd+mFWRYB331jfYWjXwR8xQCUA3IJKuwYZC8qau9Su8q7egqGW/Oaz1opebN/cp9BMFzX1QxARVnPdzc9RRCUls= root@ip-172-31-29-118.ec2.internal
+[root@ip-172-31-29-118 ~]# ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@ip-172-31-29-118 ~]# ssh root @git-server.example.com
+ssh: Could not resolve hostname root: Name or service not known
+[root@ip-172-31-29-118 ~]# shh root@git-server.example.com
+-bash: shh: command not found
+[root@ip-172-31-29-118 ~]# bash
+[root@ip-172-31-29-118 ~]#
+[root@ip-172-31-29-118 ~]# cat .ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDVpzRbDTcUdnYIGfBktyoOT2Dz+IH5Fze8JnUC6h2fQ3+OU25HpbLnh4HVtPGkvVi7XdXlO8BXegB0p88WIsEjTMssSPZX45bFut/cLNjQVucDhtMU+VGcvAzbFsQXP88t6GbsjkFQ+6CgMOSb2q59XVv7n/bdrXqCpEcpR9FC+hsawz+XMOPbzm7dsyC037AvtPOwK2ilFITCYblyipwNFitDQiViLU4sCh+UYJUHcp6hRPd79ShyOaYN4khXXIIZkcoRT7JECMqE3TICb3oNeZH6kpKPidykvKAbHZedr3fFHobewatlb+vqXudT46SuBV2kpmMs2lumWN2CQGEO1V5lNxL+2Gni1SzjTOrV/r3cZxEKTDygr52BBeMQHkuVtTH8d4/HY4SDaFvJtHTNRXstBupKj5S/Scasu1Xsfd+mFWRYB331jfYWjXwR8xQCUA3IJKuwYZC8qau9Su8q7egqGW/Oaz1opebN/cp9BMFzX1QxARVnPdzc9RRCUls= root@ip-172-31-29-118.ec2.internal
+[root@ip-172-31-29-118 ~]#
+[root@ip-172-31-29-118 ~]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+/root/.ssh/id_rsa already exists.
+Overwrite (y/n)?
+[root@ip-172-31-29-118 ~]# y
+bash: y: command not found
+[root@ip-172-31-29-118 ~]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+/root/.ssh/id_rsa already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:zj+/ldxHdUY6yHllDxUJLnmzPa8953rx1FO6Ni4lcH8 root@ip-172-31-29-118.ec2.internal
+The key's randomart image is:
++---[RSA 3072]----+
+|             .ooB|
+|           .oo B.|
+|           o+++ =|
+|          . +.+o+|
+|        S  o o ++|
+|       o    ..+*E|
+|        o    o++B|
+|         .. ..++=|
+|          .oo=+==|
++----[SHA256]-----+
+[root@ip-172-31-29-118 ~]# cat .ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDt2V0V110/aQQL3IQ8pjrntBmyCcx/UohC7YAwIzghzyhtMj1N6kVkiiBZEKFr0Ksf11NiHQiyoPOWturCinErDf8/SkjFLl74f+HoshTl+mqteSj3vsgio3gwUBkMd7hFaNZ8gNrmappPizfAysOoouR8Jeo9C3cFJPwHXoxB+x++YVjB0RKR2UJN+Tof+U72C8SwBM9ZgM6gXChZ7+Hr3puz4E84VgxwTyyV2iqMtJ6jl2+XX5QckPSe6VnW0mzA27ICTTLo8hwiCN3cYijrVwQ3gFbb5jxrc/m4evzLpkqFWDs/9APPuYPP/fpyQi1/gCQygIcjhMNj/GKg7Mm/+XRrpQ/TGo4FBQNYqA4FQA8dFmGCZf22Savy1OxxBln4vHvUE/RZBFynbMBuiOjOF7O7ooNUkyTZvxK3+7Bo559CZ9l6qXvnXr15HB+MQKNIS/0qkGyqjLIRIgv6qEQOuEFWnS+p6rkAoWjvrON9CFEo9qLETwqg2RXQszMvQM= root@ip-172-31-29-118.ec2.internal
+[root@ip-172-31-29-118 ~]# ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@ip-172-31-29-118 ~]# hostname
+ip-172-31-29-118.ec2.internal
+[root@ip-172-31-29-118 ~]#  ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@ip-172-31-29-118 ~]# exit
+exit
+[root@ip-172-31-29-118 ~]# hostname
+ip-172-31-29-118.ec2.internal
+[root@ip-172-31-29-118 ~]# hostnamect set-hostname dev-one.example.com
+-bash: hostnamect: command not found
+[root@ip-172-31-29-118 ~]# hostname set-hostname dev-one.example.com
+Usage: hostname [-b] {hostname|-F file}         set host name (from file)
+       hostname [-a|-A|-d|-f|-i|-I|-s|-y]       display formatted name
+       hostname                                 display host name
+
+       {yp,nis,}domainname {nisdomain|-F file}  set NIS domain name (from file)
+       {yp,nis,}domainname                      display NIS domain name
+
+       dnsdomainname                            display dns domain name
+
+       hostname -V|--version|-h|--help          print info and exit
+
+Program name:
+       {yp,nis,}domainname=hostname -y
+       dnsdomainname=hostname -d
+
+Program options:
+    -a, --alias            alias names
+    -A, --all-fqdns        all long host names (FQDNs)
+    -b, --boot             set default hostname if none available
+    -d, --domain           DNS domain name
+    -f, --fqdn, --long     long host name (FQDN)
+    -F, --file             read host name or NIS domain name from given file
+    -i, --ip-address       addresses for the host name
+    -I, --all-ip-addresses all addresses for the host
+    -s, --short            short host name
+    -y, --yp, --nis        NIS/YP domain name
+
+Description:
+   This command can get or set the host name or the NIS domain name. You can
+   also get the DNS domain or the FQDN (fully qualified domain name).
+   Unless you are using bind or NIS for host lookups you can change the
+   FQDN (Fully Qualified Domain Name) and the DNS domain name (which is
+   part of the FQDN) in the /etc/hosts file.
+[root@ip-172-31-29-118 ~]# bash
+[root@ip-172-31-29-118 ~]# hostnamectl set-hostname dev-one.example.com
+[root@ip-172-31-29-118 ~]# bash
+[root@dev-one ~]# hostname
+dev-one.example.com
+[root@dev-one ~]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+/root/.ssh/id_rsa already exists.
+Overwrite (y/n)?
+[root@dev-one ~]#
+[root@dev-one ~]#
+[root@dev-one ~]#
+[root@dev-one ~]#
+[root@dev-one ~]#
+[root@dev-one ~]#
+[root@dev-one ~]#
+[root@dev-one ~]#
+[root@dev-one ~]# l.
+.bash_history  .bash_logout  .bash_profile  .bashrc  .cshrc  .ssh  .tcshrc
+[root@dev-one ~]# cd .ssh
+[root@dev-one .ssh]# l.
+ls: cannot access '.*': No such file or directory
+[root@dev-one .ssh]# ll
+total 12
+-rw-------. 1 root root  554 Sep 24 06:15 authorized_keys
+-rw-------. 1 root root 2622 Sep 24 09:30 id_rsa
+-rw-r--r--. 1 root root  588 Sep 24 09:30 id_rsa.pub
+[root@dev-one .ssh]# cat id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDt2V0V110/aQQL3IQ8pjrntBmyCcx/UohC7YAwIzghzyhtMj1N6kVkiiBZEKFr0Ksf11NiHQiyoPOWturCinErDf8/SkjFLl74f+HoshTl+mqteSj3vsgio3gwUBkMd7hFaNZ8gNrmappPizfAysOoouR8Jeo9C3cFJPwHXoxB+x++YVjB0RKR2UJN+Tof+U72C8SwBM9ZgM6gXChZ7+Hr3puz4E84VgxwTyyV2iqMtJ6jl2+XX5QckPSe6VnW0mzA27ICTTLo8hwiCN3cYijrVwQ3gFbb5jxrc/m4evzLpkqFWDs/9APPuYPP/fpyQi1/gCQygIcjhMNj/GKg7Mm/+XRrpQ/TGo4FBQNYqA4FQA8dFmGCZf22Savy1OxxBln4vHvUE/RZBFynbMBuiOjOF7O7ooNUkyTZvxK3+7Bo559CZ9l6qXvnXr15HB+MQKNIS/0qkGyqjLIRIgv6qEQOuEFWnS+p6rkAoWjvrON9CFEo9qLETwqg2RXQszMvQM= root@ip-172-31-29-118.ec2.internal
+[root@dev-one .ssh]# ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one .ssh]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+/root/.ssh/id_rsa already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:YGOFWCwjz11pmTmy1geYNYdWi7XXkTTPpkaHxn6L1Hw root@dev-one.example.com
+The key's randomart image is:
++---[RSA 3072]----+
+|     +.=+B+  .+. |
+|  . + *.%= o o.* |
+|   + +=B.oo . * =|
+|    oo+o. .. +o+ |
+|     .  S.   .+oE|
+|            ....o|
+|             . . |
+|                 |
+|                 |
++----[SHA256]-----+
+[root@dev-one .ssh]# cat .ssh/id_rsa.pub
+cat: .ssh/id_rsa.pub: No such file or directory
+[root@dev-one .ssh]# cat id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDdD/kwpHtT7p67LmPEZ0QPZD7kZpRXVqvnRvZ5mUZ/WUpV+NKpm3KYTZe02QTjBXwHInVEx+YTWb8Q6oyiaYySsKoaCExMe9dGCb5pRsj1lpO3OOofYJiF99ZGaNWsjUTsQHv8TCmKOE4yK9sE3lpnLlYfYk6jmXPoRxMALe+8pIj/cVDQ5hUzK72s0+dwObtLUV3m0oU6kDIhknlZ/BKtjE0eMyIO8yayIC3hxOXQofimrYtXoRPL2fcQS0YUcLmDkSTxxv/P0ME/sFd+GvW+2crwu02Lw5DFWHkw/dxANFA88p2oeSxeyu9V90eUt3aR4R4Sje4jVsZ95qJwvnutWUjSDiq6scxDBNmvQLmkoUU0kg+lcPX4wf1Py0YyravfsK0bqEHKTLkcxAgrKKfNy/XZFNEwPUS1MpQsArvJMJsfD1ZSdWGImLidS1cbxQ2Uuns/PjMdhcOyteyJPcYmwa0Frpuyda8wS4pfiBsPfl50dVK13lfj4LBQhqrxnWs= root@dev-one.example.com
+[root@dev-one .ssh]# ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one .ssh]# cd
+[root@dev-one ~]# ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one ~]#  ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one ~]#  ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one ~]#  ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one ~]# hostname
+dev-one.example.com
+[root@dev-one ~]# cat .ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDdD/kwpHtT7p67LmPEZ0QPZD7kZpRXVqvnRvZ5mUZ/WUpV+NKpm3KYTZe02QTjBXwHInVEx+YTWb8Q6oyiaYySsKoaCExMe9dGCb5pRsj1lpO3OOofYJiF99ZGaNWsjUTsQHv8TCmKOE4yK9sE3lpnLlYfYk6jmXPoRxMALe+8pIj/cVDQ5hUzK72s0+dwObtLUV3m0oU6kDIhknlZ/BKtjE0eMyIO8yayIC3hxOXQofimrYtXoRPL2fcQS0YUcLmDkSTxxv/P0ME/sFd+GvW+2crwu02Lw5DFWHkw/dxANFA88p2oeSxeyu9V90eUt3aR4R4Sje4jVsZ95qJwvnutWUjSDiq6scxDBNmvQLmkoUU0kg+lcPX4wf1Py0YyravfsK0bqEHKTLkcxAgrKKfNy/XZFNEwPUS1MpQsArvJMJsfD1ZSdWGImLidS1cbxQ2Uuns/PjMdhcOyteyJPcYmwa0Frpuyda8wS4pfiBsPfl50dVK13lfj4LBQhqrxnWs= root@dev-one.example.com
+[root@dev-one ~]# ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one ~]# bash
+[root@dev-one ~]#  ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one ~]# ssh-genkey
+bash: ssh-genkey: command not found
+[root@dev-one ~]# ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa):
+/root/.ssh/id_rsa already exists.
+Overwrite (y/n)? y
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /root/.ssh/id_rsa
+Your public key has been saved in /root/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:nHf/kh7XUexNsmZ1+l53QKErhH4kJP1T4C+kLGFt1+Q root@dev-one.example.com
+The key's randomart image is:
++---[RSA 3072]----+
+|      ... ... .  |
+|       +.o +.. o |
+|      o =.*.E o *|
+|     . * Oo. o B+|
+|      . S =.+ *.o|
+|       . o + + oo|
+|              o.B|
+|              o=+|
+|             ...o|
++----[SHA256]-----+
+[root@dev-one ~]# cat .ssh/id_rsa.pub
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDj5Ry/dWA4cpyGN4P1uZyy4k8fPlH7AmGcNgCUSNW4T6Thq5h/XdeIjOAm1drA4J1nVrLwjfIprQtagpEVUkMtazJNUPSc1sQc5y1DAuz58leiB7Jqdo61DnJFjJJQwJlP73JzR8FxRBrIWuii4cTeQhVDkah7nBCPvEzOquNqZQEeJ9Tm8EPV1MpxcU12Yk1VNEzPFHKsWY5TILEIsD0S5v8th6/ilaY3UjsPhXmBBnHMV1MAwKJjAw5qQncvmaDMRJnkwcXWpDrqZQJOVt4FsoCh/Cvv3GIN/3yiZ2O1uyx2J4qjWzlPyuGv36Oe7Gd0pGkCy5w9J81XiTTSFX5oT9H2TgZXBgXzs4oMBtk5qzGc0L2qFrsRjWU8j/9H4+xunKiio5p2DO3tEYm6qmE7ffzt7bZoNxveJ9piipPs6066DcosZyjIpxm1NzOGTGPLE5UIw1bSj8VSxOKVmYMgQnR6Em+mNfOUCgDH5f25YLlbVL+Q/H7GHjqHuvA2Ckc= root@dev-one.example.com
+[root@dev-one ~]# hostname
+dev-one.example.com
+[root@dev-one ~]#  ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one ~]#  ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one ~]#
+[root@dev-one ~]#  ssh root@git-server.example.com
+ssh: Could not resolve hostname git-server.example.com: Name or service not known
+[root@dev-one ~]# ping git-server.example.com
+ping: git-server.example.com: Name or service not known
+[root@dev-one ~]# ip a s
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute
+       valid_lft forever preferred_lft forever
+2: ens5: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
+    link/ether 0a:ff:dd:14:ae:3b brd ff:ff:ff:ff:ff:ff
+    altname enp0s5
+    altname eni-08afc8778a2fd3e3b
+    altname device-number-0.0
+    inet 172.31.29.118/20 metric 512 brd 172.31.31.255 scope global dynamic ens5
+       valid_lft 1909sec preferred_lft 1909sec
+    inet6 fe80::8ff:ddff:fe14:ae3b/64 scope link proto kernel_ll
+       valid_lft forever preferred_lft forever
+[root@dev-one ~]# ping git-server.example.com
+ping: git-server.example.com: Name or service not known
+[root@dev-one ~]# vim /etc/hosts
+[root@dev-one ~]# ping git-server.example.com
+PING git-server.example.com (172.31.23.118) 56(84) bytes of data.
+64 bytes from git-server.example.com (172.31.23.118): icmp_seq=1 ttl=127 time=0.557 ms
+64 bytes from git-server.example.com (172.31.23.118): icmp_seq=2 ttl=127 time=0.189 ms
+64 bytes from git-server.example.com (172.31.23.118): icmp_seq=3 ttl=127 time=0.190 ms
+^C
+--- git-server.example.com ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2074ms
+rtt min/avg/max/mdev = 0.189/0.312/0.557/0.173 ms
+[root@dev-one ~]# ssh root@git-server.example.com
+The authenticity of host 'git-server.example.com (172.31.23.118)' can't be established.
+ED25519 key fingerprint is SHA256:DYkSEK8q76Hxrw+ORL1Ta+FU2R8+jzL4d3XNYW0eOkQ.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'git-server.example.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Sep 24 09:49:06 2025 from 172.31.26.58
+[root@git-server ~]# ll
+total 0
+[root@git-server ~]# ls
+[root@git-server ~]# cd /dev-two/
+-bash: cd: /dev-two/: No such file or directory
+[root@git-server ~]# client_loop: send disconnect: Connection reset
+PS C:\Users\10844721\downloads>  ssh -i "devops.pem" ec2-user@ec2-18-212-94-56.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Wed Sep 24 09:11:42 2025 from 103.244.155.144
+[ec2-user@dev-one ~]$ sudo su -
+Last login: Wed Sep 24 09:12:32 UTC 2025 on pts/1
+[root@dev-one ~]# cd /dev-one
+-bash: cd: /dev-one: No such file or directory
+[root@dev-one ~]# cd
+[root@dev-one ~]# cd /
+[root@dev-one /]# ll
+total 32
+lrwxrwxrwx.   1 root root     7 Jan 30  2023 bin -> usr/bin
+dr-xr-xr-x.   5 root root 16384 Sep 10 06:46 boot
+drwxr-xr-x.  14 root root  3060 Sep 24 08:37 dev
+drwxr-xr-x.  76 root root 16384 Sep 24 10:07 etc
+drwxr-xr-x.   3 root root    22 Sep 24 06:15 home
+lrwxrwxrwx.   1 root root     7 Jan 30  2023 lib -> usr/lib
+lrwxrwxrwx.   1 root root     9 Jan 30  2023 lib64 -> usr/lib64
+drwxr-xr-x.   2 root root     6 Sep 10 06:43 local
+drwxr-xr-x.   2 root root     6 Jan 30  2023 media
+drwxr-xr-x.   2 root root     6 Jan 30  2023 mnt
+drwxr-xr-x.   3 root root    17 Sep 10 06:46 opt
+dr-xr-xr-x. 169 root root     0 Sep 24 08:37 proc
+dr-xr-x---.   3 root root   140 Sep 24 10:07 root
+drwxr-xr-x.  28 root root   820 Sep 24 08:37 run
+lrwxrwxrwx.   1 root root     8 Jan 30  2023 sbin -> usr/sbin
+drwxr-xr-x.   2 root root     6 Jan 30  2023 srv
+dr-xr-xr-x.  13 root root     0 Sep 24 08:37 sys
+drwxrwxrwt.  11 root root   220 Sep 24 10:39 tmp
+drwxr-xr-x.  12 root root   144 Sep 10 06:44 usr
+drwxr-xr-x.  19 root root   266 Sep 24 06:15 var
+[root@dev-one /]# ls
+bin  boot  dev  etc  home  lib  lib64  local  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@dev-one /]# cd dev-one
+-bash: cd: dev-one: No such file or directory
+[root@dev-one /]# cd /dev-one/
+-bash: cd: /dev-one/: No such file or directory
+[root@dev-one /]# mkdir /dev-one
+[root@dev-one /]# cd /dev-one
+[root@dev-one dev-one]# git init
+-bash: git: command not found
+[root@dev-one dev-one]# yum install git -y
+Last metadata expiration check: 4:23:57 ago on Wed Sep 24 06:19:56 2025.
+Dependencies resolved.
+=====================================================================================================================================
+ Package                          Architecture           Version                                   Repository                   Size
+=====================================================================================================================================
+Installing:
+ git                              x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                  53 k
+Installing dependencies:
+ git-core                         x86_64                 2.50.1-1.amzn2023.0.1                     amazonlinux                 4.9 M
+ git-core-doc                     noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                 2.8 M
+ perl-Error                       noarch                 1:0.17029-5.amzn2023.0.2                  amazonlinux                  41 k
+ perl-File-Find                   noarch                 1.37-477.amzn2023.0.7                     amazonlinux                  25 k
+ perl-Git                         noarch                 2.50.1-1.amzn2023.0.1                     amazonlinux                  41 k
+ perl-TermReadKey                 x86_64                 2.38-9.amzn2023.0.2                       amazonlinux                  36 k
+ perl-lib                         x86_64                 0.65-477.amzn2023.0.7                     amazonlinux                  15 k
+
+Transaction Summary
+=====================================================================================================================================
+Install  8 Packages
+
+Total download size: 7.9 M
+Installed size: 41 M
+Downloading Packages:
+(1/8): git-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                          1.4 MB/s |  53 kB     00:00
+(2/8): git-core-doc-2.50.1-1.amzn2023.0.1.noarch.rpm                                                  40 MB/s | 2.8 MB     00:00
+(3/8): git-core-2.50.1-1.amzn2023.0.1.x86_64.rpm                                                      49 MB/s | 4.9 MB     00:00
+(4/8): perl-File-Find-1.37-477.amzn2023.0.7.noarch.rpm                                               805 kB/s |  25 kB     00:00
+(5/8): perl-Git-2.50.1-1.amzn2023.0.1.noarch.rpm                                                     1.4 MB/s |  41 kB     00:00
+(6/8): perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64.rpm                                               1.2 MB/s |  36 kB     00:00
+(7/8): perl-lib-0.65-477.amzn2023.0.7.x86_64.rpm                                                     675 kB/s |  15 kB     00:00
+(8/8): perl-Error-0.17029-5.amzn2023.0.2.noarch.rpm                                                  178 kB/s |  41 kB     00:00
+-------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                 26 MB/s | 7.9 MB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                             1/1
+  Installing       : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       1/8
+  Installing       : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   2/8
+  Installing       : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       3/8
+  Installing       : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 4/8
+  Installing       : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Installing       : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  6/8
+  Installing       : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       7/8
+  Installing       : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Running scriptlet: git-2.50.1-1.amzn2023.0.1.x86_64                                                                            8/8
+  Verifying        : git-2.50.1-1.amzn2023.0.1.x86_64                                                                            1/8
+  Verifying        : git-core-2.50.1-1.amzn2023.0.1.x86_64                                                                       2/8
+  Verifying        : git-core-doc-2.50.1-1.amzn2023.0.1.noarch                                                                   3/8
+  Verifying        : perl-Error-1:0.17029-5.amzn2023.0.2.noarch                                                                  4/8
+  Verifying        : perl-File-Find-1.37-477.amzn2023.0.7.noarch                                                                 5/8
+  Verifying        : perl-Git-2.50.1-1.amzn2023.0.1.noarch                                                                       6/8
+  Verifying        : perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64                                                                 7/8
+  Verifying        : perl-lib-0.65-477.amzn2023.0.7.x86_64                                                                       8/8
+
+Installed:
+  git-2.50.1-1.amzn2023.0.1.x86_64            git-core-2.50.1-1.amzn2023.0.1.x86_64       git-core-doc-2.50.1-1.amzn2023.0.1.noarch
+  perl-Error-1:0.17029-5.amzn2023.0.2.noarch  perl-File-Find-1.37-477.amzn2023.0.7.noarch perl-Git-2.50.1-1.amzn2023.0.1.noarch
+  perl-TermReadKey-2.38-9.amzn2023.0.2.x86_64 perl-lib-0.65-477.amzn2023.0.7.x86_64
+
+Complete!
+[root@dev-one dev-one]# git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /dev-one/.git/
+[root@dev-one dev-one]# ls
+[root@dev-one dev-one]# l.
+.git
+[root@dev-one dev-one]# vim index.html
+[root@dev-one dev-one]# git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        index.html
+
+nothing added to commit but untracked files present (use "git add" to track)
+[root@dev-one dev-one]# git add index.html
+[root@dev-one dev-one]# git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   index.html
+
+[root@dev-one dev-one]# git commit -m first commit
+error: pathspec 'commit' did not match any file(s) known to git
+[root@dev-one dev-one]# git commit -m first commit index.html
+error: pathspec 'commit' did not match any file(s) known to git
+[root@dev-one dev-one]# git commit -m first commit
+error: pathspec 'commit' did not match any file(s) known to git
+[root@dev-one dev-one]# git commit -m first-commit
+[master (root-commit) b6cd2e6] first-commit
+ Committer: root <root@dev-one.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 1 insertion(+)
+ create mode 100644 index.html
+[root@dev-one dev-one]# git remote -v
+[root@dev-one dev-one]# git remote add origin root@git-server.example.com:/code
+[root@dev-one dev-one]# git push origin master
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 230 bytes | 230.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To git-server.example.com:/code
+ * [new branch]      master -> master
+[root@dev-one dev-one]# ls
+index.html
+[root@dev-one dev-one]# git log
+commit b6cd2e64890b91268d414f1d0e4a5f158c9535a4 (HEAD -> master, origin/master)
+Author: root <root@dev-one.example.com>
+Date:   Wed Sep 24 10:50:26 2025 +0000
+
+    first-commit
+[root@dev-one dev-one]# vim index.html
+"index.html" 3L, 56B written
+[root@dev-one dev-one]# git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[root@dev-one dev-one]# git add . index.html
+[root@dev-one dev-one]# git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   index.html
+
+[root@dev-one dev-one]# git push origin master
+Everything up-to-date
+[root@dev-one dev-one]# git commit -m second-commit
+[master 9c528ae] second-commit
+ Committer: root <root@dev-one.example.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 2 insertions(+)
+[root@dev-one dev-one]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-one dev-one]# git push origin master
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 275 bytes | 275.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0 (from 0)
+To git-server.example.com:/code
+   b6cd2e6..9c528ae  master -> master
+[root@dev-one dev-one]# git status
+On branch master
+nothing to commit, working tree clean
+[root@dev-one dev-one]# git log
+commit 9c528ae1e2c246e0a0b041f08f918c639686ab4f (HEAD -> master, origin/master)
+Author: root <root@dev-one.example.com>
+Date:   Wed Sep 24 11:03:58 2025 +0000
+
+    second-commit
+
+commit b6cd2e64890b91268d414f1d0e4a5f158c9535a4
+Author: root <root@dev-one.example.com>
+Date:   Wed Sep 24 10:50:26 2025 +0000
+
+    first-commit
+[root@dev-one dev-one]# Connection to ec2-18-212-94-56.compute-1.amazonaws.com closed by remote host.
+Connection to ec2-18-212-94-56.compute-1.amazonaws.com closed.
+PS C:\Users\10844721\downloads>

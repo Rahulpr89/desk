@@ -1,0 +1,740 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\10844721\Downloads> ssh -i "myServer-keyPair.pem" ec2-user@ec2-3-88-227-24.compute-1.amazonaws.com
+The authenticity of host 'ec2-3-88-227-24.compute-1.amazonaws.com (3.88.227.24)' can't be established.
+ED25519 key fingerprint is SHA256:LWDvN0+FC05xRokNaXBU2a0DufnjrT86xqZ0d8gRMNk.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'ec2-3-88-227-24.compute-1.amazonaws.com' (ED25519) to the list of known hosts.
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+[ec2-user@ip-172-31-17-193 ~]$ sudo su -
+[root@ip-172-31-17-193 ~]# yum install httpd
+Amazon Linux 2023 Kernel Livepatch repository                                           172 kB/s |  23 kB     00:00
+Dependencies resolved.
+========================================================================================================================
+ Package                         Architecture       Version                               Repository               Size
+========================================================================================================================
+Installing:
+ httpd                           x86_64             2.4.65-1.amzn2023.0.1                 amazonlinux              47 k
+Installing dependencies:
+ apr                             x86_64             1.7.5-1.amzn2023.0.4                  amazonlinux             129 k
+ apr-util                        x86_64             1.6.3-1.amzn2023.0.1                  amazonlinux              98 k
+ generic-logos-httpd             noarch             18.0.0-12.amzn2023.0.3                amazonlinux              19 k
+ httpd-core                      x86_64             2.4.65-1.amzn2023.0.1                 amazonlinux             1.4 M
+ httpd-filesystem                noarch             2.4.65-1.amzn2023.0.1                 amazonlinux              13 k
+ httpd-tools                     x86_64             2.4.65-1.amzn2023.0.1                 amazonlinux              81 k
+ libbrotli                       x86_64             1.0.9-4.amzn2023.0.2                  amazonlinux             315 k
+ mailcap                         noarch             2.1.49-3.amzn2023.0.3                 amazonlinux              33 k
+Installing weak dependencies:
+ apr-util-openssl                x86_64             1.6.3-1.amzn2023.0.1                  amazonlinux              17 k
+ mod_http2                       x86_64             2.0.27-1.amzn2023.0.3                 amazonlinux             166 k
+ mod_lua                         x86_64             2.4.65-1.amzn2023.0.1                 amazonlinux              60 k
+
+Transaction Summary
+========================================================================================================================
+Install  12 Packages
+
+Total download size: 2.3 M
+Installed size: 6.9 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/12): apr-util-openssl-1.6.3-1.amzn2023.0.1.x86_64.rpm                                505 kB/s |  17 kB     00:00
+(2/12): apr-util-1.6.3-1.amzn2023.0.1.x86_64.rpm                                        2.3 MB/s |  98 kB     00:00
+(3/12): apr-1.7.5-1.amzn2023.0.4.x86_64.rpm                                             2.4 MB/s | 129 kB     00:00
+(4/12): generic-logos-httpd-18.0.0-12.amzn2023.0.3.noarch.rpm                           878 kB/s |  19 kB     00:00
+(5/12): httpd-2.4.65-1.amzn2023.0.1.x86_64.rpm                                          1.9 MB/s |  47 kB     00:00
+(6/12): httpd-filesystem-2.4.65-1.amzn2023.0.1.noarch.rpm                               613 kB/s |  13 kB     00:00
+(7/12): httpd-core-2.4.65-1.amzn2023.0.1.x86_64.rpm                                      37 MB/s | 1.4 MB     00:00
+(8/12): httpd-tools-2.4.65-1.amzn2023.0.1.x86_64.rpm                                    1.8 MB/s |  81 kB     00:00
+(9/12): mailcap-2.1.49-3.amzn2023.0.3.noarch.rpm                                        1.4 MB/s |  33 kB     00:00
+(10/12): libbrotli-1.0.9-4.amzn2023.0.2.x86_64.rpm                                      7.3 MB/s | 315 kB     00:00
+(11/12): mod_lua-2.4.65-1.amzn2023.0.1.x86_64.rpm                                       2.7 MB/s |  60 kB     00:00
+(12/12): mod_http2-2.0.27-1.amzn2023.0.3.x86_64.rpm                                     5.0 MB/s | 166 kB     00:00
+------------------------------------------------------------------------------------------------------------------------
+Total                                                                                    14 MB/s | 2.3 MB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                1/1
+  Installing       : apr-1.7.5-1.amzn2023.0.4.x86_64                                                               1/12
+  Installing       : apr-util-openssl-1.6.3-1.amzn2023.0.1.x86_64                                                  2/12
+  Installing       : apr-util-1.6.3-1.amzn2023.0.1.x86_64                                                          3/12
+  Installing       : mailcap-2.1.49-3.amzn2023.0.3.noarch                                                          4/12
+  Installing       : httpd-tools-2.4.65-1.amzn2023.0.1.x86_64                                                      5/12
+  Installing       : libbrotli-1.0.9-4.amzn2023.0.2.x86_64                                                         6/12
+  Running scriptlet: httpd-filesystem-2.4.65-1.amzn2023.0.1.noarch                                                 7/12
+  Installing       : httpd-filesystem-2.4.65-1.amzn2023.0.1.noarch                                                 7/12
+  Installing       : httpd-core-2.4.65-1.amzn2023.0.1.x86_64                                                       8/12
+  Installing       : mod_http2-2.0.27-1.amzn2023.0.3.x86_64                                                        9/12
+  Installing       : mod_lua-2.4.65-1.amzn2023.0.1.x86_64                                                         10/12
+  Installing       : generic-logos-httpd-18.0.0-12.amzn2023.0.3.noarch                                            11/12
+  Installing       : httpd-2.4.65-1.amzn2023.0.1.x86_64                                                           12/12
+  Running scriptlet: httpd-2.4.65-1.amzn2023.0.1.x86_64                                                           12/12
+  Verifying        : apr-1.7.5-1.amzn2023.0.4.x86_64                                                               1/12
+  Verifying        : apr-util-1.6.3-1.amzn2023.0.1.x86_64                                                          2/12
+  Verifying        : apr-util-openssl-1.6.3-1.amzn2023.0.1.x86_64                                                  3/12
+  Verifying        : generic-logos-httpd-18.0.0-12.amzn2023.0.3.noarch                                             4/12
+  Verifying        : httpd-2.4.65-1.amzn2023.0.1.x86_64                                                            5/12
+  Verifying        : httpd-core-2.4.65-1.amzn2023.0.1.x86_64                                                       6/12
+  Verifying        : httpd-filesystem-2.4.65-1.amzn2023.0.1.noarch                                                 7/12
+  Verifying        : httpd-tools-2.4.65-1.amzn2023.0.1.x86_64                                                      8/12
+  Verifying        : libbrotli-1.0.9-4.amzn2023.0.2.x86_64                                                         9/12
+  Verifying        : mailcap-2.1.49-3.amzn2023.0.3.noarch                                                         10/12
+  Verifying        : mod_http2-2.0.27-1.amzn2023.0.3.x86_64                                                       11/12
+  Verifying        : mod_lua-2.4.65-1.amzn2023.0.1.x86_64                                                         12/12
+
+Installed:
+  apr-1.7.5-1.amzn2023.0.4.x86_64                          apr-util-1.6.3-1.amzn2023.0.1.x86_64
+  apr-util-openssl-1.6.3-1.amzn2023.0.1.x86_64             generic-logos-httpd-18.0.0-12.amzn2023.0.3.noarch
+  httpd-2.4.65-1.amzn2023.0.1.x86_64                       httpd-core-2.4.65-1.amzn2023.0.1.x86_64
+  httpd-filesystem-2.4.65-1.amzn2023.0.1.noarch            httpd-tools-2.4.65-1.amzn2023.0.1.x86_64
+  libbrotli-1.0.9-4.amzn2023.0.2.x86_64                    mailcap-2.1.49-3.amzn2023.0.3.noarch
+  mod_http2-2.0.27-1.amzn2023.0.3.x86_64                   mod_lua-2.4.65-1.amzn2023.0.1.x86_64
+
+Complete!
+[root@ip-172-31-17-193 ~]# yum install curl
+Last metadata expiration check: 0:00:13 ago on Tue Sep 23 08:32:28 2025.
+Error:
+ Problem: problem with installed package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux
+  - conflicting requests
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from @System conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.87.0-2.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-7.88.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.0.1-1.amzn2023.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.2.1-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.3.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.1.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.2.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.3.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.4.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+  - package curl-minimal-8.5.0-1.amzn2023.0.5.x86_64 from amazonlinux conflicts with curl provided by curl-8.11.1-4.amzn2023.0.1.x86_64 from amazonlinux
+(try to add '--allowerasing' to command line to replace conflicting packages or '--skip-broken' to skip uninstallable packages)
+[root@ip-172-31-17-193 ~]# systemctl start httpd.service
+[root@ip-172-31-17-193 ~]# systemctl status httpd
+● httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; preset: disabled)
+     Active: active (running) since Tue 2025-09-23 08:33:16 UTC; 6s ago
+       Docs: man:httpd.service(8)
+   Main PID: 25506 (httpd)
+     Status: "Started, listening on: port 80"
+      Tasks: 177 (limit: 1057)
+     Memory: 13.3M
+        CPU: 64ms
+     CGroup: /system.slice/httpd.service
+             ├─25506 /usr/sbin/httpd -DFOREGROUND
+             ├─25527 /usr/sbin/httpd -DFOREGROUND
+             ├─25530 /usr/sbin/httpd -DFOREGROUND
+             ├─25532 /usr/sbin/httpd -DFOREGROUND
+             └─25534 /usr/sbin/httpd -DFOREGROUND
+
+Sep 23 08:33:16 ip-172-31-17-193.ec2.internal systemd[1]: Starting httpd.service - The Apache HTTP Server...
+Sep 23 08:33:16 ip-172-31-17-193.ec2.internal systemd[1]: Started httpd.service - The Apache HTTP Server.
+Sep 23 08:33:16 ip-172-31-17-193.ec2.internal httpd[25506]: Server configured, listening on: port 80
+[root@ip-172-31-17-193 ~]# curl htttp://3.88.227.24
+curl: (1) Protocol "htttp" not supported
+[root@ip-172-31-17-193 ~]# curl http://3.88.227.24
+<html><body><h1>It works!</h1></body></html>
+[root@ip-172-31-17-193 ~]# cd /var/www/html/
+[root@ip-172-31-17-193 html]# vim index.html
+[root@ip-172-31-17-193 html]# curl http://3.88.227.24
+`
+[root@ip-172-31-17-193 html]# vim index.html
+[root@ip-172-31-17-193 html]# curl http://3.88.227.24
+it works for me
+[root@ip-172-31-17-193 html]# vim /etc/httpd/conf/httpd.conf
+[root@ip-172-31-17-193 html]# systemctl stop httpd.service
+[root@ip-172-31-17-193 html]# stystemctl status httpd
+-bash: stystemctl: command not found
+[root@ip-172-31-17-193 html]# systemctl status httpd
+○ httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; preset: disabled)
+     Active: inactive (dead)
+       Docs: man:httpd.service(8)
+
+Sep 23 08:33:16 ip-172-31-17-193.ec2.internal systemd[1]: Starting httpd.service - The Apache HTTP Server...
+Sep 23 08:33:16 ip-172-31-17-193.ec2.internal systemd[1]: Started httpd.service - The Apache HTTP Server.
+Sep 23 08:33:16 ip-172-31-17-193.ec2.internal httpd[25506]: Server configured, listening on: port 80
+Sep 23 08:39:11 ip-172-31-17-193.ec2.internal systemd[1]: Stopping httpd.service - The Apache HTTP Server...
+Sep 23 08:39:12 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Deactivated successfully.
+Sep 23 08:39:12 ip-172-31-17-193.ec2.internal systemd[1]: Stopped httpd.service - The Apache HTTP Server.
+[root@ip-172-31-17-193 html]# systemctl restart httpd
+[root@ip-172-31-17-193 html]# systemctl start htpd.service
+Failed to start htpd.service: Unit htpd.service not found.
+[root@ip-172-31-17-193 html]# systemctl start htpd.service
+Failed to start htpd.service: Unit htpd.service not found.
+[root@ip-172-31-17-193 html]# systemctl reload-or-restart
+List of units to restart/reload is required.
+[root@ip-172-31-17-193 html]# systemctl reload-or-restart httpd
+[root@ip-172-31-17-193 html]# systemctl start htpd.service
+Failed to start htpd.service: Unit htpd.service not found.
+[root@ip-172-31-17-193 html]# systemctl status httpd
+● httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; preset: disabled)
+     Active: active (running) since Tue 2025-09-23 08:40:16 UTC; 3min 27s ago
+       Docs: man:httpd.service(8)
+    Process: 26412 ExecReload=/usr/sbin/httpd $OPTIONS -k graceful (code=exited, status=0/SUCCESS)
+   Main PID: 26055 (httpd)
+     Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
+      Tasks: 177 (limit: 1057)
+     Memory: 13.4M
+        CPU: 381ms
+     CGroup: /system.slice/httpd.service
+             ├─26055 /usr/sbin/httpd -DFOREGROUND
+             ├─26413 /usr/sbin/httpd -DFOREGROUND
+             ├─26414 /usr/sbin/httpd -DFOREGROUND
+             ├─26425 /usr/sbin/httpd -DFOREGROUND
+             └─26446 /usr/sbin/httpd -DFOREGROUND
+
+Sep 23 08:40:16 ip-172-31-17-193.ec2.internal systemd[1]: Starting httpd.service - The Apache HTTP Server...
+Sep 23 08:40:16 ip-172-31-17-193.ec2.internal systemd[1]: Started httpd.service - The Apache HTTP Server.
+Sep 23 08:40:16 ip-172-31-17-193.ec2.internal httpd[26055]: Server configured, listening on: port 81
+Sep 23 08:42:55 ip-172-31-17-193.ec2.internal systemd[1]: Reloading httpd.service - The Apache HTTP Server...
+Sep 23 08:42:55 ip-172-31-17-193.ec2.internal systemd[1]: Reloaded httpd.service - The Apache HTTP Server.
+Sep 23 08:42:55 ip-172-31-17-193.ec2.internal httpd[26055]: Server configured, listening on: port 81
+[root@ip-172-31-17-193 html]# curl http://3.88.227.24
+curl: (7) Failed to connect to 3.88.227.24 port 80 after 0 ms: Could not connect to server
+[root@ip-172-31-17-193 html]# curl http://3.88.227.24
+curl: (7) Failed to connect to 3.88.227.24 port 80 after 0 ms: Could not connect to server
+[root@ip-172-31-17-193 html]# curl tcp://3.88.227.24
+curl: (1) Protocol "tcp" not supported
+[root@ip-172-31-17-193 html]# curl http://3.88.227.24
+curl: (7) Failed to connect to 3.88.227.24 port 80 after 0 ms: Could not connect to server
+[root@ip-172-31-17-193 html]# systemctl status httpd
+● httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; preset: disabled)
+     Active: active (running) since Tue 2025-09-23 08:40:16 UTC; 7min ago
+       Docs: man:httpd.service(8)
+    Process: 26412 ExecReload=/usr/sbin/httpd $OPTIONS -k graceful (code=exited, status=0/SUCCESS)
+   Main PID: 26055 (httpd)
+     Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
+      Tasks: 177 (limit: 1057)
+     Memory: 13.4M
+        CPU: 563ms
+     CGroup: /system.slice/httpd.service
+             ├─26055 /usr/sbin/httpd -DFOREGROUND
+             ├─26413 /usr/sbin/httpd -DFOREGROUND
+             ├─26414 /usr/sbin/httpd -DFOREGROUND
+             ├─26425 /usr/sbin/httpd -DFOREGROUND
+             └─26446 /usr/sbin/httpd -DFOREGROUND
+
+Sep 23 08:40:16 ip-172-31-17-193.ec2.internal systemd[1]: Starting httpd.service - The Apache HTTP Server...
+Sep 23 08:40:16 ip-172-31-17-193.ec2.internal systemd[1]: Started httpd.service - The Apache HTTP Server.
+Sep 23 08:40:16 ip-172-31-17-193.ec2.internal httpd[26055]: Server configured, listening on: port 81
+Sep 23 08:42:55 ip-172-31-17-193.ec2.internal systemd[1]: Reloading httpd.service - The Apache HTTP Server...
+Sep 23 08:42:55 ip-172-31-17-193.ec2.internal systemd[1]: Reloaded httpd.service - The Apache HTTP Server.
+Sep 23 08:42:55 ip-172-31-17-193.ec2.internal httpd[26055]: Server configured, listening on: port 81
+[root@ip-172-31-17-193 html]# curl http://3.88.227.24
+curl: (7) Failed to connect to 3.88.227.24 port 80 after 0 ms: Could not connect to server
+[root@ip-172-31-17-193 html]# curl http://3.88.227.24
+curl: (7) Failed to connect to 3.88.227.24 port 80 after 0 ms: Could not connect to server
+[root@ip-172-31-17-193 html]# systemctl stop httpd
+[root@ip-172-31-17-193 html]# systemctl status httpd
+○ httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; preset: disabled)
+     Active: inactive (dead)
+       Docs: man:httpd.service(8)
+
+Sep 23 08:39:12 ip-172-31-17-193.ec2.internal systemd[1]: Stopped httpd.service - The Apache HTTP Server.
+Sep 23 08:40:16 ip-172-31-17-193.ec2.internal systemd[1]: Starting httpd.service - The Apache HTTP Server...
+Sep 23 08:40:16 ip-172-31-17-193.ec2.internal systemd[1]: Started httpd.service - The Apache HTTP Server.
+Sep 23 08:40:16 ip-172-31-17-193.ec2.internal httpd[26055]: Server configured, listening on: port 81
+Sep 23 08:42:55 ip-172-31-17-193.ec2.internal systemd[1]: Reloading httpd.service - The Apache HTTP Server...
+Sep 23 08:42:55 ip-172-31-17-193.ec2.internal systemd[1]: Reloaded httpd.service - The Apache HTTP Server.
+Sep 23 08:42:55 ip-172-31-17-193.ec2.internal httpd[26055]: Server configured, listening on: port 81
+Sep 23 08:49:16 ip-172-31-17-193.ec2.internal systemd[1]: Stopping httpd.service - The Apache HTTP Server...
+Sep 23 08:49:17 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Deactivated successfully.
+Sep 23 08:49:17 ip-172-31-17-193.ec2.internal systemd[1]: Stopped httpd.service - The Apache HTTP Server.
+[root@ip-172-31-17-193 html]# systemctl start httpd.service
+[root@ip-172-31-17-193 html]# systemctl status httpd
+● httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; preset: disabled)
+     Active: active (running) since Tue 2025-09-23 08:49:43 UTC; 6s ago
+       Docs: man:httpd.service(8)
+   Main PID: 26956 (httpd)
+     Status: "Started, listening on: port 81"
+      Tasks: 177 (limit: 1057)
+     Memory: 13.3M
+        CPU: 66ms
+     CGroup: /system.slice/httpd.service
+             ├─26956 /usr/sbin/httpd -DFOREGROUND
+             ├─26957 /usr/sbin/httpd -DFOREGROUND
+             ├─26958 /usr/sbin/httpd -DFOREGROUND
+             ├─26959 /usr/sbin/httpd -DFOREGROUND
+             └─26960 /usr/sbin/httpd -DFOREGROUND
+
+Sep 23 08:49:43 ip-172-31-17-193.ec2.internal systemd[1]: Starting httpd.service - The Apache HTTP Server...
+Sep 23 08:49:43 ip-172-31-17-193.ec2.internal httpd[26956]: Server configured, listening on: port 81
+Sep 23 08:49:43 ip-172-31-17-193.ec2.internal systemd[1]: Started httpd.service - The Apache HTTP Server.
+[root@ip-172-31-17-193 html]# curl http://3.88.227.24
+curl: (7) Failed to connect to 3.88.227.24 port 80 after 0 ms: Could not connect to server
+[root@ip-172-31-17-193 html]# cd /var/www/html/
+[root@ip-172-31-17-193 html]# ls
+index.html
+[root@ip-172-31-17-193 html]# vim /etc/httpd/conf/httpd.conf
+[root@ip-172-31-17-193 html]# cat /var/www/html/index.html
+it works for me
+[root@ip-172-31-17-193 html]# systemctl mask httpd
+Created symlink /etc/systemd/system/httpd.service → /dev/null.
+[root@ip-172-31-17-193 html]# systemctl status httpd
+● httpd.service
+     Loaded: masked (Reason: Unit httpd.service is masked.)
+     Active: active (running) since Tue 2025-09-23 08:49:43 UTC; 18min ago
+   Main PID: 26956 (httpd)
+     Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
+        CPU: 973ms
+     CGroup: /system.slice/httpd.service
+             ├─26956 /usr/sbin/httpd -DFOREGROUND
+             ├─26957 /usr/sbin/httpd -DFOREGROUND
+             ├─26958 /usr/sbin/httpd -DFOREGROUND
+             ├─26959 /usr/sbin/httpd -DFOREGROUND
+             └─26960 /usr/sbin/httpd -DFOREGROUND
+
+Sep 23 08:49:43 ip-172-31-17-193.ec2.internal systemd[1]: Starting httpd.service - The Apache HTTP Server...
+Sep 23 08:49:43 ip-172-31-17-193.ec2.internal httpd[26956]: Server configured, listening on: port 81
+Sep 23 08:49:43 ip-172-31-17-193.ec2.internal systemd[1]: Started httpd.service - The Apache HTTP Server.
+Sep 23 09:07:33 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:07:43 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+
+[root@ip-172-31-17-193 html]# systemctl status httpd
+● httpd.service
+     Loaded: masked (Reason: Unit httpd.service is masked.)
+     Active: active (running) since Tue 2025-09-23 08:49:43 UTC; 18min ago
+   Main PID: 26956 (httpd)
+     Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
+        CPU: 1.019s
+     CGroup: /system.slice/httpd.service
+             ├─26956 /usr/sbin/httpd -DFOREGROUND
+             ├─26957 /usr/sbin/httpd -DFOREGROUND
+             ├─26958 /usr/sbin/httpd -DFOREGROUND
+             ├─26959 /usr/sbin/httpd -DFOREGROUND
+             └─26960 /usr/sbin/httpd -DFOREGROUND
+
+Sep 23 08:49:43 ip-172-31-17-193.ec2.internal systemd[1]: Starting httpd.service - The Apache HTTP Server...
+Sep 23 08:49:43 ip-172-31-17-193.ec2.internal httpd[26956]: Server configured, listening on: port 81
+Sep 23 08:49:43 ip-172-31-17-193.ec2.internal systemd[1]: Started httpd.service - The Apache HTTP Server.
+Sep 23 09:07:33 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:07:43 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:07:53 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:03 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:13 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:23 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:33 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+
+[root@ip-172-31-17-193 html]# systemctl unmask httpd
+Removed "/etc/systemd/system/httpd.service".
+[root@ip-172-31-17-193 html]# systemctl status httpd
+● httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; preset: disabled)
+     Active: active (running) since Tue 2025-09-23 08:49:43 UTC; 19min ago
+       Docs: man:httpd.service(8)
+   Main PID: 26956 (httpd)
+     Status: "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec"
+      Tasks: 177 (limit: 1057)
+     Memory: 13.3M
+        CPU: 1.051s
+     CGroup: /system.slice/httpd.service
+             ├─26956 /usr/sbin/httpd -DFOREGROUND
+             ├─26957 /usr/sbin/httpd -DFOREGROUND
+             ├─26958 /usr/sbin/httpd -DFOREGROUND
+             ├─26959 /usr/sbin/httpd -DFOREGROUND
+             └─26960 /usr/sbin/httpd -DFOREGROUND
+
+Sep 23 09:07:33 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:07:43 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:07:53 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:03 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:13 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:23 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:33 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:43 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:53 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:09:03 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+
+[root@ip-172-31-17-193 html]# systemctl stop httpd
+[root@ip-172-31-17-193 html]# systemctl status httpd
+○ httpd.service - The Apache HTTP Server
+     Loaded: loaded (/usr/lib/systemd/system/httpd.service; disabled; preset: disabled)
+     Active: inactive (dead)
+       Docs: man:httpd.service(8)
+
+Sep 23 09:08:13 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:23 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:33 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:43 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:08:53 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:09:03 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Got notification message from PID 26956, but r>
+Sep 23 09:10:04 ip-172-31-17-193.ec2.internal systemd[1]: Stopping httpd.service - The Apache HTTP Server...
+Sep 23 09:10:05 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Deactivated successfully.
+Sep 23 09:10:05 ip-172-31-17-193.ec2.internal systemd[1]: Stopped httpd.service - The Apache HTTP Server.
+Sep 23 09:10:05 ip-172-31-17-193.ec2.internal systemd[1]: httpd.service: Consumed 1.106s CPU time.
+
+[root@ip-172-31-17-193 html]# cd ..
+[root@ip-172-31-17-193 www]# cd ../..
+[root@ip-172-31-17-193 /]# ls
+bin  boot  dev  etc  home  lib  lib64  local  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@ip-172-31-17-193 /]# cd ..
+[root@ip-172-31-17-193 /]# ls
+bin  boot  dev  etc  home  lib  lib64  local  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+[root@ip-172-31-17-193 /]# useradd rahul
+[root@ip-172-31-17-193 /]# passwd rahul
+Changing password for user rahul.
+New password:
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[root@ip-172-31-17-193 /]# useradd vikash
+[root@ip-172-31-17-193 /]# passwd vikash
+Changing password for user vikash.
+New password:
+BAD PASSWORD: The password is shorter than 8 characters
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[root@ip-172-31-17-193 /]# groupadd sales
+[root@ip-172-31-17-193 /]# groupadd mktg
+[root@ip-172-31-17-193 /]# mkdir /data
+[root@ip-172-31-17-193 /]# usermod -G sales rahul
+[root@ip-172-31-17-193 /]# usermod -G mktg vikash
+[root@ip-172-31-17-193 /]# usermod -aG sales vikash
+[root@ip-172-31-17-193 /]# usermod -aG mktg rahul
+[root@ip-172-31-17-193 /]# su - rahul
+[rahul@ip-172-31-17-193 ~]$ cd data
+-bash: cd: data: No such file or directory
+[rahul@ip-172-31-17-193 ~]$ ls
+[rahul@ip-172-31-17-193 ~]$ exit
+logout
+[root@ip-172-31-17-193 /]# su - vikash
+[vikash@ip-172-31-17-193 ~]$ cd data
+-bash: cd: data: No such file or directory
+[vikash@ip-172-31-17-193 ~]$ ll -d data
+ls: cannot access 'data': No such file or directory
+[vikash@ip-172-31-17-193 ~]$ sudo su -
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+For security reasons, the password you type will not be visible.
+
+[sudo] password for vikash:
+jSorry, try again.
+[sudo] password for vikash:
+vikash is not in the sudoers file.
+[vikash@ip-172-31-17-193 ~]$ exit
+logout
+[root@ip-172-31-17-193 /]# ll -d data
+drwxr-xr-x. 2 root root 6 Sep 23 09:13 data
+[root@ip-172-31-17-193 /]# chgrp sales /data
+[root@ip-172-31-17-193 /]# ll -d data
+drwxr-xr-x. 2 root sales 6 Sep 23 09:13 data
+[root@ip-172-31-17-193 /]# sudo - rahul
+sudo: -: command not found
+[root@ip-172-31-17-193 /]# su - rahul
+Last login: Tue Sep 23 09:14:52 UTC 2025 on pts/1
+[rahul@ip-172-31-17-193 ~]$ cd data
+-bash: cd: data: No such file or directory
+[rahul@ip-172-31-17-193 ~]$ cd /data/
+[rahul@ip-172-31-17-193 data]$ ll
+total 0
+[rahul@ip-172-31-17-193 data]$ cd
+[rahul@ip-172-31-17-193 ~]$ exit
+logout
+[root@ip-172-31-17-193 /]# cd
+[root@ip-172-31-17-193 ~]# ll
+total 0
+[root@ip-172-31-17-193 ~]# cd /
+[root@ip-172-31-17-193 /]# ll
+total 32
+lrwxrwxrwx.   1 root root      7 Jan 30  2023 bin -> usr/bin
+dr-xr-xr-x.   5 root root  16384 Sep 10 06:46 boot
+drwxr-xr-x.   2 root sales     6 Sep 23 09:13 data
+drwxr-xr-x.  14 root root   3060 Sep 23 08:26 dev
+drwxr-xr-x.  77 root root  16384 Sep 23 09:14 etc
+drwxr-xr-x.   5 root root     49 Sep 23 09:12 home
+lrwxrwxrwx.   1 root root      7 Jan 30  2023 lib -> usr/lib
+lrwxrwxrwx.   1 root root      9 Jan 30  2023 lib64 -> usr/lib64
+drwxr-xr-x.   2 root root      6 Sep 10 06:43 local
+drwxr-xr-x.   2 root root      6 Jan 30  2023 media
+drwxr-xr-x.   2 root root      6 Jan 30  2023 mnt
+drwxr-xr-x.   3 root root     17 Sep 10 06:46 opt
+dr-xr-xr-x. 161 root root      0 Sep 23 08:25 proc
+dr-xr-x---.   3 root root    119 Sep 23 09:01 root
+drwxr-xr-x.  29 root root    860 Sep 23 08:32 run
+lrwxrwxrwx.   1 root root      8 Jan 30  2023 sbin -> usr/sbin
+drwxr-xr-x.   2 root root      6 Jan 30  2023 srv
+dr-xr-xr-x.  13 root root      0 Sep 23 08:26 sys
+drwxrwxrwt.  11 root root    220 Sep 23 09:19 tmp
+drwxr-xr-x.  12 root root    144 Sep 10 06:44 usr
+drwxr-xr-x.  20 root root    277 Sep 23 08:32 var
+[root@ip-172-31-17-193 /]# cd
+[root@ip-172-31-17-193 ~]#
+[root@ip-172-31-17-193 ~]#
+[root@ip-172-31-17-193 ~]# cat /etc/group | grep -i sales
+sales:x:1003:rahul,vikash
+[root@ip-172-31-17-193 ~]# su - rahul
+Last login: Tue Sep 23 09:18:27 UTC 2025 on pts/1
+[rahul@ip-172-31-17-193 ~]$ cd /data/
+[rahul@ip-172-31-17-193 data]$ pwd
+/data
+[rahul@ip-172-31-17-193 data]$ exit
+logout
+[root@ip-172-31-17-193 ~]# vim /etc/services
+[root@ip-172-31-17-193 ~]# client_loop: send disconnect: Connection reset
+PS C:\Users\10844721\Downloads> ssh -i "myServer-keyPair.pem" ec2-user@ec2-3-88-227-24.compute-1.amazonaws.com
+   ,     #_
+   ~\_  ####_        Amazon Linux 2023
+  ~~  \_#####\
+  ~~     \###|
+  ~~       \#/ ___   https://aws.amazon.com/linux/amazon-linux-2023
+   ~~       V~' '->
+    ~~~         /
+      ~~._.   _/
+         _/ _/
+       _/m/'
+Last login: Tue Sep 23 08:26:28 2025 from 103.244.155.144
+[ec2-user@ip-172-31-17-193 ~]$
